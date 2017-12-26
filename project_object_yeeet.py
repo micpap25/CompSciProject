@@ -7,6 +7,12 @@ class characters(object):
       self.speed=speed
       self.weapon=weapon
       self.inventory=inventory
+
+    def attack(self):
+
+
+    def search(self):
+        return
 #includes bosses and bogies
 class room(object):
   def __init__(self,doors,you,loot=0,bogies=0,bos=0):
