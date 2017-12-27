@@ -1,20 +1,41 @@
 #all objects
-class characters(object):
-  def __init__(self,hp,attck,speed,weapon,inventory):
+import random
+class Characters(object):
+  def __init__(self,hp,attck,speed,weapon,inventory, in_battle=False, event=0):
       #we can make inventory a list
       self.hp=hp
       self.attck=attck
       self.speed=speed
       self.weapon=weapon
       self.inventory=inventory
+      self.in_battle=in_battle
+      self.event=event
 
     def attack(self):
-
+        if self.in_battle==False:
+            update="You can not attack if you are not in battle!"
+        else:
+            #insert generic attack sequence
 
     def search(self):
-        return
+        if self.in_battle==True:
+            update="You cannot search for loot in battle! Are you crazy?"
+        else:
+            luck=random.randint(1,15)
+            #now we can make 1-5 empty, 6-12 loot of increasing value(6-8 low) (9-11 middle)(12-godlike), and 13-15......TRAPS!!!(insert evil laugh)
+            if luck in [1,2,3,4,5]:
+                #empty chest
+            elif luck in [6,7,8,9,10,11,12]:
+
+            elif luck in [13,14,15]:
+                #TRAAAAAPPPSSSS!!! YAYAYAYAYYAYAY
+
+    def move(self):
+        if self.in_battle==False:
+            #sooooo, hoz dis gonna work?
+
 #includes bosses and bogies
-class room(object):
+class Room(object):
   def __init__(self,doors,you,loot=0,bogies=0,bos=0):
       self.doors=doors
       self.you=you
