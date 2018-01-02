@@ -39,7 +39,8 @@ class Characters(object):
                 elif luck==15:
                     trap=0
                     self.event+=trap
-                #TRAAAAAPPPSSSS!!! YAYAYAYAYYAYAY
+                    self.hp-=20
+
 
     def move(self):
         if self.in_battle==False:
