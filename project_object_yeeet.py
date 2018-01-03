@@ -59,7 +59,7 @@ class Room(object):
 
 
 #do we really need to make loot_crate an object? We can just make lists of treasure that get added to the players inventory
-class loot_crate(object):
+class Loot_crate(object):
   def __init(self, loot):
       self.loot=loot
 
