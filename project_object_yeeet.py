@@ -42,7 +42,7 @@ class Characters(object):
                     self.hp-=20
 
 
-    def move(self):
+    def use_item(self):
         if self.in_battle==False:
             #sooooo, hoz dis gonna work?
 
