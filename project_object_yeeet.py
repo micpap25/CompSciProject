@@ -1,7 +1,7 @@
 #all objects
 import random
 class Characters(object):
-  def __init__(self,hp,attck,speed,weapon,inventory, in_battle=False, event=0):
+    def __init__(self,name,hp,attck,speed,weapon,inventory, in_battle=False, event=0):
       #we can make inventory a list
       self.hp=hp
       self.attck=attck
@@ -10,12 +10,28 @@ class Characters(object):
       self.inventory=inventory
       self.in_battle=in_battle
       self.event=event
+      self.name=name
 
-    def attack(self):
+    def attack(self, enemy):
         if self.in_battle==False:
             update="You can not attack if you are not in battle!"
         else:
+            total_dex = self.speed + enemy.speed
+            hit_attempt = random.randrange(0, total_dex)
+            if (hit_attempt <= self.speed):
+                damage = random.randrange(0, self.attck)
+                enemy.hit_points -= damage
+                result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
+            else:
+                result = self.name + " misses " + enemy.name + "."
+
+            return result
             #insert generic attack sequence
+
+    def die(self):
+        if self.hp<=0:
+            print("I'm sorry, I couldn't be it....(dies) ")
+
 
     def search(self):
         if self.in_battle==True:
@@ -42,8 +58,9 @@ class Characters(object):
                     self.hp-=20
 
 
-    def use_item(self):
-        if self.in_battle==False:
+    '''def use_item(self):
+        if self.in_battle==False:'''
+            #this is extra
             #sooooo, hoz dis gonna work?
 
 #includes bosses and bogies
