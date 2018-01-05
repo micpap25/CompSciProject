@@ -39,6 +39,7 @@ class Room_GUI(tkinter.Frame):
         Characters.moveAround('"fill in whatever the player is"', self.direction)
     def searchButton(self):
         self.search_bttn = tkinter.Button(self, text = "Search", command = self.searching)
+        self.search_bttn.grid(row = 2, column = 0, sticky = tkinter.W)
     def searching(self):
         Characters.search("fill in whatever the player is")
 
