@@ -24,6 +24,8 @@ class Room_GUI(tkinter.Frame):
         #To move, choose a radiobutton then press the movebutton.
         # It passes it off to move in project_objects which changes position
         #We can place the move button above the image, and the radiobuttons in their corresponding places around it.
+        self.direction = tkinter.StringVar()
+        self.direction.set(tkinter.NONE)
         self.north = tkinter.Radiobutton(self, text="North", variable=self.direction, value="N")
         self.north.grid(row = 0, column = 1, )
         self.west = tkinter.Radiobutton(self, text="West", variable=self.direction, value="W")
