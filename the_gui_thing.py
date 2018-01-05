@@ -13,7 +13,7 @@ class Room_GUI(tkinter.Frame):
         self.grid()
         #self.alerts()
     def Room_widgets(self):
-        imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
+        imageSmall = tkinter.PhotoImage(file="Images\dungeon_floor.jpg")
         w = tkinter.Label(self,
                           image=imageSmall,
                           )
@@ -41,7 +41,7 @@ class Room_GUI(tkinter.Frame):
         Characters.moveAround('"fill in whatever the player is"', self.direction)
     def searchButton(self):
         self.search_bttn = tkinter.Button(self, text = "Search", command = self.searching)
-    def searching
+    #def searching
 
 
 
