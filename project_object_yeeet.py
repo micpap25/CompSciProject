@@ -1,8 +1,9 @@
 #all objects
 import random
 class Characters(object):
-    def __init__(self,name,hp,attck,speed,weapon,inventory, in_battle=False, event=0):
+    def __init__(self,name,hp,attck,speed,weapon,inventory, in_battle=False, event=0, horiPos = 0, vertPos = 0):
       #we can make inventory a list
+
       self.hp=hp
       self.attck=attck
       self.speed=speed
@@ -11,6 +12,9 @@ class Characters(object):
       self.in_battle=in_battle
       self.event=event
       self.name=name
+      self.horiPos = horiPos
+      self.vertPos = vertPos
+
 
     def attack(self, enemy):
         if self.in_battle==False:
@@ -62,6 +66,17 @@ class Characters(object):
         if self.in_battle==False:'''
             #this is extra
             #sooooo, hoz dis gonna work?
+    def moveAround(self, direction):
+        if direction == "N":
+            self.vertPos += 1
+        elif direction == "E":
+            self.horiPos += 1
+        elif direction == "S":
+            self.vertPos -= 1
+        elif direction == "W":
+            self.horiPos-=1
+
+
 
 #includes bosses and bogies
 class Room(object):
