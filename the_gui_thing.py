@@ -9,6 +9,8 @@ class Room_GUI(tkinter.Frame):
 
         #self.small_image=small_image
         self.Room_widgets()
+        self.moveButton()
+        self.grid()
         #self.alerts()
     def Room_widgets(self):
         imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
@@ -23,7 +25,7 @@ class Room_GUI(tkinter.Frame):
         # It passes it off to move in project_objects which changes position
         #We can place the move button above the image, and the radiobuttons in their corresponding places around it.
         self.north = tkinter.Radiobutton(self, text="North", variable=self.direction, value="N")
-        self.north.grid()
+        self.north.grid(row = 0, column = 1, )
         self.west = tkinter.Radiobutton(self, text="West", variable=self.direction, value="W")
         self.west.grid()
         self.south = tkinter.Radiobutton(self, text="South", variable=self.direction, value="S")
