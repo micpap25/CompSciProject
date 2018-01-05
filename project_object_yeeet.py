@@ -14,7 +14,7 @@ class Characters(object):
       self.name=name
       self.horiPos = horiPos
       self.vertPos = vertPos
-
+      self.character_shape="Images\images.png"
 
     def attack(self, enemy):
         if self.in_battle==False:
