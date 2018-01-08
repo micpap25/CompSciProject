@@ -1,14 +1,12 @@
 #all objects
 import random
 class Characters(object):
-    def __init__(self,name,hp,attck,speed,weapon,inventory, in_battle=False, event=0, horiPos = 0, vertPos = 0):
+    def __init__(self,name,hp,attck,speed, in_battle=False, event=0, horiPos = 0, vertPos = 0):
       #we can make inventory a list
 
       self.hp=hp
       self.attck=attck
       self.speed=speed
-      self.weapon=weapon
-      self.inventory=inventory
       self.in_battle=in_battle
       self.event=event
       self.name=name
