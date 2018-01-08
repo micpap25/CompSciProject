@@ -12,11 +12,13 @@ class Characters(object):
       self.name=name
       self.horiPos = horiPos
       self.vertPos = vertPos
+      self.inventory=[]
 
 
     def attack(self, enemy):
         if self.in_battle==False:
             update="You can not attack if you are not in battle!"
+            return update
         else:
             total_dex = self.speed + enemy.speed
             hit_attempt = random.randrange(0, total_dex)
@@ -38,16 +40,36 @@ class Characters(object):
     def search(self):
         if self.in_battle==True:
             update="You cannot search for loot in battle! Are you crazy?"
+            return update
         else:
             luck=random.randint(1,15)
             #now we can make 1-5 empty, 6-12 loot of increasing value(6-8 low) (9-11 middle)(12-godlike), and 13-15......TRAPS!!!(insert evil laugh)
             if luck in [1,2,3,4,5]:
                 self.event+=10
+
                 #empty chest
             elif luck in [6,7,8,9,10,11,12]:
                 self.event+=10
                 if luck in [6,7]:
-                    self
+                    self.inventory.append("Potion")
+                    update="You found a potion, it will heal 20 hp!"
+                    return update
+                elif luck in [8]:
+                    self.attck+=10
+                    update="You found a potion of attack! You gain 10 attck!"
+                    return update
+                elif luck in [9]:
+                    self.speed+=10
+                    update="You found a potion of speed! You gain 10 speed!"
+                    return update
+                elif luck in [10, 11]:
+                    self.inventory.append("Wand of Defence")
+                    update="You found a wand of defence. It negates any damage! (One use)"
+                    return update
+                elif luck in [12]:
+                    self.inventory.append("Light sword!")
+                    update="Finnaly! You found the light sword! It multiplies your damage by 2!(passive)"
+                    return update
 
             elif luck in [13,14,15]:
                 if luck==13:
