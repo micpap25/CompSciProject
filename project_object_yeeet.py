@@ -75,13 +75,19 @@ class Characters(object):
                 if luck==13:
                     trap=20
                     self.event += trap
+                    update='You triggered a trap! A siren wails.'
+                    return update
                 elif luck==14:
                     trap=25
                     self.event += trap
+                    update="You triggered a trap! A door glows bright red."
+                    return update
                 elif luck==15:
                     trap=0
                     self.event+=trap
                     self.hp-=20
+                    update='Ouch! You stepped on a spike!'
+                    return update
 
 
     '''def use_item(self):
