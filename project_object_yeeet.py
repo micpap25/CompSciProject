@@ -80,16 +80,27 @@ class Characters(object):
 
 #includes bosses and bogies
 class Room(object):
-  def __init__(self,doors,you,loot=0,bogies=0,bos=0):
+  def __init__(self,doors,you,charlist,loot=0):
       self.doors=doors
       self.you=you
       self.loot=loot
-      self.bogies=bogies
-      self.boss=bos
-
-#includes all charachters and loot as well as doors
-
-
+      self.library=charlist
+  def spawn(self):
+      t=random.randrange(0,self.you.event)
+      if t <10:
+          t = t
+      if t <20:
+          skel=Characters(self.library["skeleton"])
+          return skel
+class charlist(object):
+    def __init__(self,file):
+        self.dict={}
+        self.file=file
+    def read(self):
+        filename=open(self.file,"r")
+        for l in filename:
+            p = l.split(", ")
+            self.dict[p[0]]=p
 #do we really need to make loot_crate an object? We can just make lists of treasure that get added to the players inventory
 class Loot_crate(object):
   def __init(self, loot):
