@@ -46,6 +46,8 @@ class Characters(object):
                 #empty chest
             elif luck in [6,7,8,9,10,11,12]:
                 self.event+=10
+                if luck in [6,7]:
+                    self
 
             elif luck in [13,14,15]:
                 if luck==13:
