@@ -1,44 +1,19 @@
 from project_object_yeeet import Characters,Loot_crate,Room
-from character_make import CharList
 import tkinter
 class Room_GUI(tkinter.Frame):
-    def __init__(self,master, char_list):#,Charachters,Room,Loot_crate):
+    def __init__(self,master):#,Charachters,Room,Loot_crate):
         super(Room_GUI,self).__init__(master)
         #self.room=Room
         #self.characters=Charachters
         #self.loot_crate=Loot_crate
 
         #self.small_image=small_image
-        self.chars = char_list
-        self.cho = self.select_character()
-        self.player = self.chars[self.cho]
         self.Room_widgets()
         self.moveButton()
         self.grid()
         #self.alerts()
-    def select_character(self):
-        self.character = tkinter.StringVar()
-        self.character.set(None)
-        self.hp = tkinter.Label(self, text="Hit Points").grid(row=0, column=2, sticky=tkinter.W)
-        self.dex = tkinter.Label(self, text="Dexterity").grid(row=0, column=3, sticky=tkinter.W)
-        self.str = tkinter.Label(self, text="Strength").grid(row=0, column=4, sticky=tkinter.W)
-        row = 1
-        for c in self.chars:
-            cho_button = tkinter.Radiobutton(self, text=c.name, variable=self.character, value=row - 1)
-            cho_button.grid(row=row, column=0, sticky=tkinter.W)
-            cre_hp = tkinter.Label(self, text=c.hit_points).grid(row=row, column=2, sticky=tkinter.W)
-            cre_dex = tkinter.Label(self, text=c.dexterity).grid(row=row, column=3, sticky=tkinter.W)
-            cre_str = tkinter.Label(self, text=c.strength).grid(row=row, column=4, sticky=tkinter.W)
-            row += 1
-        nxt_bttn = tkinter.Button(self, text="Next", command=self.move_on)
-        nxt_bttn.grid(row=5, column=4, sticky=tkinter.W)
-    def move_on(self):
-        for widget in self.winfo_children():
-            widget.destoy()
-            return self.character
     def Room_widgets(self):
-        tkinter.Label()
-        imageSmall = tkinter.PhotoImage(file="Images\dungeon_floor.jpg")
+        imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
         w = tkinter.Label(self,
                           image=imageSmall,
                           )
@@ -63,11 +38,10 @@ class Room_GUI(tkinter.Frame):
         self.move_bttn = tkinter.Button(self, text = "Move", command = self.moving)
         self.move_bttn.grid(row = 2, column = 3, sticky = tkinter.W)
     def moving(self):
-        Characters.moveAround(self.player, self.direction)
+        Characters.moveAround('"fill in whatever the player is"', self.direction)
     def searchButton(self):
         self.search_bttn = tkinter.Button(self, text = "Search", command = self.searching)
-    def searching(self):
-        Characters.search(self.player)
+    def searching
 
 
 
