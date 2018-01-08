@@ -1,22 +1,18 @@
 from project_object_yeeet import Characters,Loot_crate,Room
 import tkinter
-import random
 class Room_GUI(tkinter.Frame):
     def __init__(self,master):#,Charachters,Room,Loot_crate):
         super(Room_GUI,self).__init__(master)
         #self.room=Room
         #self.characters=Charachters
         #self.loot_crate=Loot_crate
-        names = ["Rodrick", "Wilson", "Benjamin", "Leonard", "Robert", "Jonathan", "Alexander"]
-        n = random.randrange(0, 6)
-        char = Characters(names[n])
+
+        #self.small_image=small_image
         self.Room_widgets()
         self.moveButton()
-        self.searchButton()
         self.grid()
         #self.alerts()
     def Room_widgets(self):
-        tkinter.Label(self, text = ("@%d,%d" % (Characters.horiPos, Characters.vertPos)))
         imageSmall = tkinter.PhotoImage(file="Images\dungeon_floor.jpg")
         w = tkinter.Label(self,
                           image=imageSmall,
@@ -45,8 +41,7 @@ class Room_GUI(tkinter.Frame):
         Characters.moveAround('"fill in whatever the player is"', self.direction)
     def searchButton(self):
         self.search_bttn = tkinter.Button(self, text = "Search", command = self.searching)
-    def searching(self):
-        Characters.search("fill in whatever the player is")
+    #def searching
 
 
 

@@ -1,2 +1,3 @@
 Here we can add the characters(want to make new ones or stick to the battle ones?)
 Are characters getting starting inventories?
+Yes they each get one potion to start(heals ten HP- can only be used in battle.)
