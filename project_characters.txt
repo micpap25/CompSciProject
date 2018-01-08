@@ -1,2 +1,4 @@
-
-Yes they each get one potion to start(heals ten HP- can only be used in battle.)
+Troll,160,90,20
+Elf,80,35,80
+Dwarf,110,45,65
+Human,100,50,50
