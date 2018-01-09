@@ -11,18 +11,15 @@ class Characters(object):
       self.inventory=[]
       self.pic=picture
 
+
     def attack(self, enemy):
-        if self.in_battle==False:
-            update="You can not attack if you are not in battle!"
-            return update
+        total_dex = self.speed + enemy.speed
+        hit_attempt = random.randrange(0, total_dex)
+        if (hit_attempt <= self.speed):
+            damage = random.randrange(0, self.attck)
+            enemy.hit_points -= damage
+            result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
         else:
-            total_dex = self.speed + enemy.speed
-            hit_attempt = random.randrange(0, total_dex)
-            if (hit_attempt <= self.speed):
-                damage = random.randrange(0, self.attck)
-                enemy.hit_points -= damage
-                result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
-            else:
                 result = self.name + " misses " + enemy.name + "."
 
             return result
