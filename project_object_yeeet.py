@@ -27,17 +27,7 @@ class Characters(object):
 
     def die(self):
         if self.hp<=0:
-            print("I'm sorry, I couldn't be it....(dies) ")
-
-
-
-
-
-    '''def use_item(self):
-        if self.in_battle==False:'''
-            #this is extra
-            #sooooo, hoz dis gonna work?
-
+            print("I'm sorry, I couldn't make it....(dies) ")
 
 #hi
 class Player(Characters):
@@ -63,7 +53,7 @@ class Player(Characters):
                 self.event+=10
                 if luck in [6,7]:
                     self.inventory.append("Potion")
-                    update="You found a potion, it will heal 20 hp!"
+                    update="You found a potion, it will heal 20 hp! It can even overheal!"
                     return update
                 elif luck in [8]:
                     self.attck+=10
@@ -96,16 +86,32 @@ class Player(Characters):
                 elif luck==15:
                     trap=0
                     self.event+=trap
-                    self.hp-=20
+                    self.hp-=25
                     update='Ouch! You stepped on a spike!'
                     return update
+    def use_item(self, item):
+        if item in self.inventory:
+            if item=="Potion":
+                self.inventory.remove("Potion")
+                self.hp+=20
+                update='You healed 20 damage, your health is now'+str(self.hp)
+                return update
+        else:
+            update="You don't have that item."
+            return update
+
+
+
+
 #includes bosses and bogies
 class Room(object):
-  def __init__(self,doors,you,charlist,loot=0):
+  def __init__(self,doors,you,charlist,loot=0,vertPos=0,horiPos=0):
       self.doors=doors
       self.you=you
       self.loot=loot
       self.library=charlist
+      self.vertPos=vertPos
+      self.horiPos=horiPos
 
   def moveAround(self, direction):
     if direction == "N":
@@ -136,10 +142,14 @@ class charlist(object):
             l.strip()
             p = l.split(", ")
             self.dict[p[0]]= p
-#do we really need to make loot_crate an object? We can just make lists of treasure that get added to the players inventory
-class Loot_crate(object):
+#
+
+
+
+# do we really need to make loot_crate an object? We can just make lists of treasure that get added to the players inventory
+'''class Loot_crate(object):
   def __init(self, loot):
-      self.loot=loot
+      self.loot=loot'''
 
   
 #a box with potions and stuff
