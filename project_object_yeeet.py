@@ -40,7 +40,7 @@ class Player(Characters):
     def s_attack(self, enemy):
         total_dex = self.speed + enemy.speed
         hit_attempt = random.randrange(0, total_dex)
-        if (hit_attempt <= self.speed):
+        elif (hit_attempt <= self.speed) and "Light sword" not in self.inventory:
             damage = random.randrange(0, self.attck)
             enemy.hit_points -= damage
             result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
