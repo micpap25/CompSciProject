@@ -21,8 +21,7 @@ class Characters(object):
             result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
         else:
                 result = self.name + " misses " + enemy.name + "."
-
-            return result
+        return result
             #insert generic attack sequence
 
     def die(self):
@@ -107,15 +106,6 @@ class Room(object):
       self.loot=loot
       self.library=charlist
 
-  def moveAround(self, direction):
-    if direction == "N":
-        self.vertPos += 1
-    elif direction == "E":
-        self.horiPos += 1
-    elif direction == "S":
-        self.vertPos -= 1
-    elif direction == "W":
-        self.horiPos -= 1
 
   def spawn(self):
       t=random.randrange(0,self.you.event)
@@ -124,7 +114,6 @@ class Room(object):
       if t <20:
           skel=Characters(self.library["skeleton"])
           return skel
-      if t<30:
 
 class charlist(object):
     def __init__(self,file):

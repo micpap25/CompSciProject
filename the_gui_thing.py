@@ -44,7 +44,6 @@ class Room_GUI(tkinter.Frame):
         self.move_bttn = tkinter.Button(self, text = "Move", command = self.moving)
         self.move_bttn.grid(row = 2, column = 3, sticky = tkinter.W)
     def moving(self):
-        self.player.event += 5
         imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
         w = tkinter.Label(self,
                           image=imageSmall,
