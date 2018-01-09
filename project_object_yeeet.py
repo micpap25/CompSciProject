@@ -19,8 +19,9 @@ class Characters(object):
             damage = random.randrange(0, self.attck)
             enemy.hit_points -= damage
             result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
+            return result
         else:
-                result = self.name + " misses " + enemy.name + "."
+            result = self.name + " misses " + enemy.name + "."
 
             return result
             #insert generic attack sequence
