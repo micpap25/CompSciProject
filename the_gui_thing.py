@@ -1,4 +1,4 @@
-from project_object_yeeet import Characters,Loot_crate,Room
+from project_object_yeeet import Characters,Room
 import tkinter
 class Room_GUI(tkinter.Frame):
     def __init__(self,master):#,Charachters,Room,Loot_crate):
@@ -41,7 +41,8 @@ class Room_GUI(tkinter.Frame):
         Characters.moveAround('"fill in whatever the player is"', self.direction)
     def searchButton(self):
         self.search_bttn = tkinter.Button(self, text = "Search", command = self.searching)
-    def searching
+    def searching:
+        Characters.search
 
 
 
@@ -49,4 +50,6 @@ root=tkinter.Tk()
 root.title("HI")
 app=Room_GUI(root)
 root.mainloop()
+
+#HI
 
