@@ -39,7 +39,7 @@ class Characters(object):
             #sooooo, hoz dis gonna work?
 
 
-
+#hi
 class Player(Characters):
     def __init__(self,master,in_battle=False, event=0, horiPos = 0, vertPos = 0):
         super(Characters,self).__init__(master)
