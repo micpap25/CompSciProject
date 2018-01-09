@@ -30,6 +30,24 @@ class Characters(object):
             print("I'm sorry, I couldn't be it....(dies) ")
 
 
+
+
+
+    '''def use_item(self):
+        if self.in_battle==False:'''
+            #this is extra
+            #sooooo, hoz dis gonna work?
+
+
+
+class Player(Characters):
+    def __init__(self,master,in_battle=False, event=0, horiPos = 0, vertPos = 0):
+        super(Characters,self).__init__(master)
+        self.horiPos = horiPos
+        self.vertPos = vertPos
+        self.in_battle = in_battle
+        self.event = event
+
     def search(self):
         if self.in_battle==True:
             update="You cannot search for loot in battle! Are you crazy?"
@@ -81,31 +99,6 @@ class Characters(object):
                     self.hp-=20
                     update='Ouch! You stepped on a spike!'
                     return update
-
-
-    '''def use_item(self):
-        if self.in_battle==False:'''
-            #this is extra
-            #sooooo, hoz dis gonna work?
-    def moveAround(self, direction):
-        if direction == "N":
-            self.vertPos += 1
-        elif direction == "E":
-            self.horiPos += 1
-        elif direction == "S":
-            self.vertPos -= 1
-        elif direction == "W":
-            self.horiPos-=1
-
-
-class Player(Characters):
-    def __init__(self,master,in_battle=False, event=0, horiPos = 0, vertPos = 0):
-        super(Characters,self).__init__(master)
-        self.horiPos = horiPos
-        self.vertPos = vertPos
-        self.in_battle = in_battle
-        self.event = event
-    def
 #includes bosses and bogies
 class Room(object):
   def __init__(self,doors,you,charlist,loot=0):
@@ -113,6 +106,17 @@ class Room(object):
       self.you=you
       self.loot=loot
       self.library=charlist
+
+  def moveAround(self, direction):
+    if direction == "N":
+        self.vertPos += 1
+    elif direction == "E":
+        self.horiPos += 1
+    elif direction == "S":
+        self.vertPos -= 1
+    elif direction == "W":
+        self.horiPos -= 1
+
   def spawn(self):
       t=random.randrange(0,self.you.event)
       if t <10:
