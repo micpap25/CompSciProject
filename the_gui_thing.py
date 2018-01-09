@@ -11,10 +11,7 @@ class Room_GUI(tkinter.Frame):
         #self.small_image=small_image
         c = CharList("All_DA_Characters.txt")
         self.chars = c.load_chars()
-        self.cho = self.select_character()
-        self.player = self.chars[self.cho]
-        self.Room_widgets()
-        self.moveButton()
+        self.select_character()
         self.grid()
         #self.alerts()
     def select_character(self):
@@ -27,16 +24,19 @@ class Room_GUI(tkinter.Frame):
         for c in self.chars:
             cho_button = tkinter.Radiobutton(self, text=c.name, variable=self.character, value=row - 1)
             cho_button.grid(row=row, column=0, sticky=tkinter.W)
-            cre_hp = tkinter.Label(self, text=c.hit_points).grid(row=row, column=2, sticky=tkinter.W)
-            cre_dex = tkinter.Label(self, text=c.dexterity).grid(row=row, column=3, sticky=tkinter.W)
-            cre_str = tkinter.Label(self, text=c.strength).grid(row=row, column=4, sticky=tkinter.W)
+            cre_hp = tkinter.Label(self, text=c.hp).grid(row=row, column=2, sticky=tkinter.W)
+            cre_dex = tkinter.Label(self, text=c.speed).grid(row=row, column=3, sticky=tkinter.W)
+            cre_str = tkinter.Label(self, text=c.attck).grid(row=row, column=4, sticky=tkinter.W)
             row += 1
         nxt_bttn = tkinter.Button(self, text="Next", command=self.move_on)
-        nxt_bttn.grid(row=5, column=4, sticky=tkinter.W)
+        nxt_bttn.grid(row=10, column=4, sticky=tkinter.W)
     def move_on(self):
+        self.cho = self.character
+        self.player = self.chars[self.cho]
         for widget in self.winfo_children():
             widget.destoy()
-            return self.character
+        self.Room_widgets()
+        self.moveButton()
     def Room_widgets(self):
         tkinter.Label()
         imageSmall = tkinter.PhotoImage(file="Images\dungeon_floor.jpg")
