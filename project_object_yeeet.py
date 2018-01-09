@@ -31,9 +31,9 @@ class Characters(object):
 
 #hi
 class Player(Characters):
-    def __init__(self,master,in_battle=False):
+    def __init__(self,master):
         super(Characters,self).__init__(master)
-        self.in_battle = in_battle
+        self.in_battle = False
         self.event = 0
         self.inventory = []
 
@@ -109,6 +109,7 @@ class Player(Characters):
                     self.hp-=25
                     update='Ouch! You stepped on a spike!'
                     return update
+
     def use_item(self, item):
         if item in self.inventory:
             if item=="Potion":
