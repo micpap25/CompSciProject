@@ -12,3 +12,4 @@ class CharList(object):
             my_fields = line.split(",")
             character = Characters(my_fields[0], int(my_fields[1]), int(my_fields[2]), int(my_fields[3]))
             self.character_list.append(character)
+        return self.character_list
