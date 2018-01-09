@@ -1,14 +1,14 @@
 #all objects
 import random
 class Characters(object):
-    def __init__(self,name,hp,attck,speed, picture):
+    def __init__(self,name,hp,attck,speed ):#picture
       #we can make inventory a list
 
       self.hp=hp
       self.attck=attck
       self.speed=speed
       self.name=name
-      self.pic=picture
+      #self.pic=picture
 
 
     def attack(self, enemy):
