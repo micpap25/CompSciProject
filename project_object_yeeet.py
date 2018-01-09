@@ -127,16 +127,6 @@ class Room(object):
       self.vertPos=vertPos
       self.horiPos=horiPos
 
-
-  def spawn(self):
-      t=random.randrange(0,self.you.event)
-      if t <10:
-          t = t
-      if t <20:
-          skel=Characters(self.library["skeleton"])
-          return skel
-      if t<30:
-
 class charlist(object):
     def __init__(self,file):
         self.dict={}
