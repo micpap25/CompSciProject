@@ -46,7 +46,8 @@ class Player(Characters):
             #now we can make 1-5 empty, 6-12 loot of increasing value(6-8 low) (9-11 middle)(12-godlike), and 13-15......TRAPS!!!(insert evil laugh)
             if luck in [1,2,3,4,5]:
                 self.event+=10
-
+                update="It was empty"
+                return update
                 #empty chest
             elif luck in [6,7,8,9,10,11,12]:
                 self.event+=10
