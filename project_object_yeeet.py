@@ -8,7 +8,6 @@ class Characters(object):
       self.attck=attck
       self.speed=speed
       self.name=name
-      self.inventory=[]
       self.pic=picture
 
 
@@ -32,10 +31,24 @@ class Characters(object):
 
 #hi
 class Player(Characters):
-    def __init__(self,master,event,in_battle=False):
+    def __init__(self,master,in_battle=False):
         super(Characters,self).__init__(master)
         self.in_battle = in_battle
-        self.event = event
+        self.event = 0
+        self.inventory = []
+
+    def s_attack(self, enemy):
+        total_dex = self.speed + enemy.speed
+        hit_attempt = random.randrange(0, total_dex)
+        if (hit_attempt <= self.speed):
+            damage = random.randrange(0, self.attck)
+            enemy.hit_points -= damage
+            result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
+            return result
+        else:
+            result = self.name + " misses " + enemy.name + "."
+
+            return result
 
     def search(self):
         if self.in_battle==True:
@@ -96,6 +109,7 @@ class Player(Characters):
                 self.hp+=20
                 update='You healed 20 damage, your health is now'+str(self.hp)
                 return update
+
         else:
             update="You don't have that item."
             return update
