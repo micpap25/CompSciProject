@@ -1,19 +1,15 @@
 #all objects
 import random
 class Characters(object):
-    def __init__(self,name,hp,attck,speed, in_battle=False, event=0, horiPos = 0, vertPos = 0):
+    def __init__(self,name,hp,attck,speed, picture):
       #we can make inventory a list
 
       self.hp=hp
       self.attck=attck
       self.speed=speed
-      self.in_battle=in_battle
-      self.event=event
       self.name=name
-      self.horiPos = horiPos
-      self.vertPos = vertPos
       self.inventory=[]
-
+      self.pic=picture
 
     def attack(self, enemy):
         if self.in_battle==False:
@@ -105,7 +101,14 @@ class Characters(object):
             self.horiPos-=1
 
 
-
+class Player(Characters):
+    def __init__(self,master,in_battle=False, event=0, horiPos = 0, vertPos = 0):
+        super(Characters,self).__init__(master)
+        self.horiPos = horiPos
+        self.vertPos = vertPos
+        self.in_battle = in_battle
+        self.event = event
+    def
 #includes bosses and bogies
 class Room(object):
   def __init__(self,doors,you,charlist,loot=0):
@@ -120,6 +123,8 @@ class Room(object):
       if t <20:
           skel=Characters(self.library["skeleton"])
           return skel
+      if t<30:
+
 class charlist(object):
     def __init__(self,file):
         self.dict={}
@@ -127,8 +132,9 @@ class charlist(object):
     def read(self):
         filename=open(self.file,"r")
         for l in filename:
+            l.strip()
             p = l.split(", ")
-            self.dict[p[0]]=p
+            self.dict[p[0]]= p
 #do we really need to make loot_crate an object? We can just make lists of treasure that get added to the players inventory
 class Loot_crate(object):
   def __init(self, loot):
