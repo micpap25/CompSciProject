@@ -1,15 +1,15 @@
 #all objects
 import random
 class Characters(object):
-    def __init__(self,list1):
+    def __init__(self,name,hp,attck,speed, picture):
       #we can make inventory a list
 
-      self.hp=list1[1]
-      self.attck=list1[2]
-      self.speed=list1[3]
-      self.name=list1[0]
+      self.hp=hp
+      self.attck=attck
+      self.speed=speed
+      self.name=name
       self.inventory=[]
-      self.pic=list1[4]
+      self.pic=picture
 
 
     def attack(self, enemy):
@@ -21,7 +21,8 @@ class Characters(object):
             result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
         else:
                 result = self.name + " misses " + enemy.name + "."
-        return result
+
+            return result
             #insert generic attack sequence
 
     def die(self):
@@ -38,14 +39,14 @@ class Characters(object):
             #sooooo, hoz dis gonna work?
 
 
-
+#hi
 class Player(Characters):
-    def __init__(self,master,in_battle=False, horiPos = 0, vertPos = 0):
+    def __init__(self,master,in_battle=False, event=0, horiPos = 0, vertPos = 0):
         super(Characters,self).__init__(master)
         self.horiPos = horiPos
         self.vertPos = vertPos
         self.in_battle = in_battle
-        self.event = 0
+        self.event = event
 
     def search(self):
         if self.in_battle==True:
@@ -105,8 +106,17 @@ class Room(object):
       self.you=you
       self.loot=loot
       self.library=charlist
-      self.vertPos=0
-      self.horiPos=0
+
+  def moveAround(self, direction):
+    if direction == "N":
+        self.vertPos += 1
+    elif direction == "E":
+        self.horiPos += 1
+    elif direction == "S":
+        self.vertPos -= 1
+    elif direction == "W":
+        self.horiPos -= 1
+
   def spawn(self):
       t=random.randrange(0,self.you.event)
       if t <10:
@@ -114,7 +124,7 @@ class Room(object):
       if t <20:
           skel=Characters(self.library["skeleton"])
           return skel
-
+      if t<30:
 
 class charlist(object):
     def __init__(self,file):
