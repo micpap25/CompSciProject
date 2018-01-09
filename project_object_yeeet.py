@@ -32,10 +32,8 @@ class Characters(object):
 
 #hi
 class Player(Characters):
-    def __init__(self,master,in_battle=False, event=0, horiPos = 0, vertPos = 0):
+    def __init__(self,master,event,in_battle=False):
         super(Characters,self).__init__(master)
-        self.horiPos = horiPos
-        self.vertPos = vertPos
         self.in_battle = in_battle
         self.event = event
 
