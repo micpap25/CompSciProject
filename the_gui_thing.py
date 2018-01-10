@@ -44,7 +44,7 @@ class Room_GUI(tkinter.Frame):
     def move_on(self):
         self.cho = int(self.character.get())
 
-        self.player = self.chars[self.cho]
+        self.player = Player(self.chars[self.cho])
 
         for widget in self.winfo_children():
             widget.destroy()
