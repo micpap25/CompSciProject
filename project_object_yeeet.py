@@ -1,4 +1,5 @@
 #all objects
+#IDIDIT
 import random
 class Characters(object):
     def __init__(self,name,hp,attck,speed, picture):
@@ -16,6 +17,11 @@ class Characters(object):
         hit_attempt = random.randrange(0, total_dex)
         if (hit_attempt <= self.speed):
             damage = random.randrange(0, self.attck)
+            if damage > enemy.hp and "Wand of Defence" in enemy.inventory:
+                damage = 0
+                enemy.inventory.remove("Wand of Defence")
+                result = enemy.name + " used the Wand of Defense! No damage is taken!"
+                return result
             enemy.hit_points -= damage
             result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
             return result
@@ -66,7 +72,7 @@ class Player(Characters):
             #now we can make 1-5 empty, 6-12 loot of increasing value(6-8 low) (9-11 middle)(12-godlike), and 13-15......TRAPS!!!(insert evil laugh)
             if luck in [1,2,3,4,5]:
                 self.event+=10
-                update="It was empty"
+                update="It was empty."
                 return update
                 #empty chest
             elif luck in [6,7,8,9,10,11,12]:
@@ -89,7 +95,7 @@ class Player(Characters):
                     return update
                 elif luck in [12]:
                     self.inventory.append("Light sword!")
-                    update="Finnaly! You found the light sword! It multiplies your damage by 2!(passive)"
+                    update="Finally! You found the light sword! It multiplies your damage by 2!(passive)"
                     return update
 
             elif luck in [13,14,15]:
@@ -134,6 +140,8 @@ class Room(object):
       self.library=charlist
       self.vertPos=vertPos
       self.horiPos=horiPos
+
+
 
 class charlist(object):
     def __init__(self,file):
