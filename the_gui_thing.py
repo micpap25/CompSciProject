@@ -47,7 +47,7 @@ class Room_GUI(tkinter.Frame):
         self.player = self.chars[self.cho]
 
         for widget in self.winfo_children():
-            widget.destoy()
+            widget.destroy()
         self.Room_widgets()
         self.moveButton()
         self.grid()
