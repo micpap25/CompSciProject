@@ -1,4 +1,5 @@
 #all objects
+#IDIDIT
 import random
 class Characters(object):
     def __init__(self,name,hp,attck,speed, picture):
