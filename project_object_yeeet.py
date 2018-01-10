@@ -89,7 +89,7 @@ class Player(Characters):
                     return update
                 elif luck in [12]:
                     self.inventory.append("Light sword!")
-                    update="Finnaly! You found the light sword! It multiplies your damage by 2!(passive)"
+                    update="Finally! You found the light sword! It multiplies your damage by 2!(passive)"
                     return update
 
             elif luck in [13,14,15]:
