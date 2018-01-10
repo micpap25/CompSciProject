@@ -38,7 +38,7 @@ class Characters(object):
 #hi
 class Player(Characters):
     def __init__(self,master):
-        super(Characters,self).__init__(master)
+        super(Characters,self).__init__()
         self.in_battle = False
         self.event = 0
         self.inventory = []
