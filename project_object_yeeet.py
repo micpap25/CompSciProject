@@ -137,6 +137,8 @@ class Room(object):
       self.vertPos=vertPos
       self.horiPos=horiPos
 
+
+
 class charlist(object):
     def __init__(self,file):
         self.dict={}
