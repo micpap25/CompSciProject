@@ -59,7 +59,7 @@ class Room_GUI(tkinter.Frame):
         w.photo = imageSmall
         w.grid(row = 1, column = 1, columnspan = 2, sticky = tkinter.W)
     def moveButton(self):
-        p = random.randint(0, 3)
+        p = random.randrange(0, 3)
         self.direction = tkinter.StringVar()
         self.direction.set(tkinter.NONE)
         self.north = tkinter.Radiobutton(self, text="North", variable=self.direction, value="N")
@@ -76,7 +76,7 @@ class Room_GUI(tkinter.Frame):
             self.south.grid(row=2, column=2, sticky=tkinter.W)
         self.east = tkinter.Radiobutton(self, text="East", variable=self.direction, value="E")
 
-        if p <= 4:
+        if p <= 3:
             self.east.grid(row=1, column=3, sticky=tkinter.W)
         self.move_bttn = tkinter.Button(self, text="Move", command=self.moving)
         self.move_bttn.grid(row=2, column=3, sticky=tkinter.W)
