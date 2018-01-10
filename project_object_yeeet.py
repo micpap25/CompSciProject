@@ -9,6 +9,7 @@ class Characters(object):
       self.speed=speed
       self.name=name
       self.pic=picture
+      self.event = 0
 
 
     def attack(self, enemy):
