@@ -1,7 +1,7 @@
-Troll, 160, 90, 20
-Elf, 80, 35, 80
-Dwarf, 110, 45, 65
-Human, 100, 50, 50
+Troll,160,90,20,troll_100.gif,troll_300.gif
+Elf,80,35,80,elf_100.gif,elf_300.gif
+Dwarf,110,45,65,dwarf_100.gif,dwarf_300.gif
+Human,100,50,50,human_100.gif,human_300.gif
 Goblin, 60, 45, 70
 Skeleton, 20, 80, 60
 Slime, 100, 10, 30
