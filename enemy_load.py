@@ -11,6 +11,6 @@ class EnemyList(object):
         for line in text_file:
             line = line.strip()
             my_fields = line.split(",")
-            enemy = Characters(my_fields[0], int(my_fields[1]), int(my_fields[2]), int(my_fields[3]), my_fields[4])
+            enemy = Characters(my_fields)
             self.enemy_list.append(enemy)
         return self.enemy_list
