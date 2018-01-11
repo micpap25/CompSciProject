@@ -2,6 +2,7 @@ import random
 from project_object_yeeet import Characters,Room,Player
 from character_make import CharList
 import tkinter
+import time
 class Room_GUI(tkinter.Frame):
     def __init__(self,master):#,Charachters,Room,Loot_crate):
         super(Room_GUI,self).__init__(master)
@@ -10,11 +11,9 @@ class Room_GUI(tkinter.Frame):
         #self.loot_crate=Loot_crate
         c = CharList("All_DA_Characters.txt")
         self.chars = c.load_chars()
-
         self.select_character()
         self.grid()
         # self.alerts()
-
     def select_character(self):
         self.character = tkinter.StringVar()
 
@@ -62,10 +61,12 @@ class Room_GUI(tkinter.Frame):
                           )
         w.photo = imageSmall
         w.grid(row = 1, column = 1, columnspan = 2, sticky = tkinter.W)
+        self.searchButton()
     def moveButton(self):
         p = random.randrange(0, 3)
         self.direction = tkinter.StringVar()
         self.direction.set(tkinter.NONE)
+        self.disclaimer=tkinter.Label(self,text="you will automatically be moved east if you don't enter a field").grid(row=5,column=1,columnspan=5)
         self.north = tkinter.Radiobutton(self, text="North", variable=self.direction, value="N")
 
         if p <= 0:
@@ -98,11 +99,13 @@ class Room_GUI(tkinter.Frame):
     def searchButton(self):
         self.search_bttn = tkinter.Button(self, text = "Search", command = self.searching)
         self.search_bttn.grid(row = 2, column = 0, sticky = tkinter.W)
-        self.search_lbl = tkinter.Label(self,)
     def searching(self):
-        h = 0
-
-
+        p = self.player.search()
+        self.l = tkinter.Label(self, text=p)
+        self.l.grid(row=6,column=0)
+        root.after(3000,self.l_destroy)
+    def l_destroy(self):
+        self.l.destroy()
 
 root=tkinter.Tk()
 root.title("HI")

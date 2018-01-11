@@ -2,14 +2,13 @@
 #IDIDIT
 import random
 class Characters(object):
-    def __init__(self,name,hp,attck,speed, picture):
+    def __init__(self,list1):
       #we can make inventory a list
-
-      self.hp=hp
-      self.attck=attck
-      self.speed=speed
-      self.name=name
-      self.pic=picture
+      self.name = (list1[0])
+      self.hp=int(list1[1])
+      self.attck=int(list1[2])
+      self.speed=int(list1[3])
+      self.pic=(list1[4])
 
 
     def attack(self, enemy):
@@ -37,8 +36,8 @@ class Characters(object):
 
 #hi
 class Player(Characters):
-    def __init__(self,master):
-        super(Characters,self).__init__()
+    def __init__(self,p):
+        Characters.__init__(self,[p.name,p.hp,p.attck,p.speed,p.pic,])
         self.in_battle = False
         self.event = 0
         self.inventory = []
@@ -80,13 +79,17 @@ class Player(Characters):
                 if luck in [6,7]:
                     self.inventory.append("Potion")
                     update="You found a potion, it will heal 20 hp! It can even overheal!"
+                    self.hp+=20
+                    print(str(self.hp))
                     return update
                 elif luck in [8]:
                     self.attck+=10
+                    print(str(self.attck))
                     update="You found a potion of attack! You gain 10 attck!"
                     return update
                 elif luck in [9]:
                     self.speed+=10
+                    print(str(self.speed))
                     update="You found a potion of speed! You gain 10 speed!"
                     return update
                 elif luck in [10, 11]:
@@ -117,6 +120,7 @@ class Player(Characters):
                     return update
 
     def use_item(self, item):
+        #might not be helpful
         if item in self.inventory:
             if item=="Potion":
                 self.inventory.remove("Potion")
