@@ -122,15 +122,16 @@ class Player(Characters):
 
     def use_item(self, item):
         #might not be helpful
-        if item in self.inventory:
-            if item=="Potion":
-                self.inventory.remove("Potion")
-                self.hp+=20
-                update='You healed 20 damage, your health is now'+str(self.hp)
-                return update
-
-        else:
-            update="You don't have that item."
+        if item=="Potion":
+            self.inventory.remove("Potion")
+            self.hp+=20
+            update='You healed 20 damage, your health is now'+str(self.hp)
+            return update
+        elif item=="Wand of Defence":
+            update = "You should save that for battle."
+            return update
+        elif item == "Light sword!":
+            update = "You swing the sword a little. It's pretty cool."
             return update
 
 class EnemyList(object):

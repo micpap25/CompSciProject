@@ -55,6 +55,7 @@ class Room_GUI(tkinter.Frame):
         self.Room_widgets()
         self.moveButton()
         self.searchButton()
+        self.items()
         self.grid()
     def Room_widgets(self):
         imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
@@ -68,7 +69,7 @@ class Room_GUI(tkinter.Frame):
         p = random.randrange(0, 3)
         self.direction = tkinter.StringVar()
         self.direction.set(tkinter.NONE)
-        self.disclaimer=tkinter.Label(self,text="you will automatically be moved east if you don't enter a field").grid(row=5,column=1,columnspan=5)
+        self.disclaimer=tkinter.Label(self,text="You will automatically be moved east if you don't enter a field.").grid(row=5,column=1,columnspan=5)
         self.north = tkinter.Radiobutton(self, text="North", variable=self.direction, value="N")
 
         if p <= 0:
@@ -97,22 +98,34 @@ class Room_GUI(tkinter.Frame):
         self.south.destroy()
         self.west.destroy()
         self.north.destroy()
-        self.searchButton()
-        Room(self.player)
         self.moveButton()
     def searchButton(self):
         self.search_bttn = tkinter.Button(self, text = "Search", command = self.searching)
         self.search_bttn.grid(row = 2, column = 0, sticky = tkinter.W)
     def searching(self):
-        self.search_bttn.destroy()
         p = self.player.search()
         self.l = tkinter.Label(self, text=p)
-        self.l.grid(row=6,column=0,columnspan=5)
+        self.l.grid(row=6,column=1, sticky = tkinter.W)
         root.after(3000,self.l_destroy)
+        self.items()
     def l_destroy(self):
         self.l.destroy()
-        Room(self.player)
-#hi
+    def items(self):
+        self.info = ""
+        self.menuVar = tkinter.StringVar()
+        self.list = self.player.inventory
+        if len(self.list) > 0:
+            self.menuVar.set(self.list[0])
+            self.show = tkinter.OptionMenu(self, self.menuVar, *self.list)
+            self.show.grid(row=4, column=0, sticky=tkinter.W)
+            self.useItem = tkinter.Button(self, text="Use item", command=self.using)
+            self.useItem.grid(row=4, column=1, sticky=tkinter.W)
+            self.information = tkinter.Label(self, text = self.show)
+            self.information.grid(row = 5, column = 0, sticky = tkinter.W)
+    def using(self):
+        self.menuVar.get()
+        self.info = self.player.use_item(str(self.menuVar))
+
 root=tkinter.Tk()
 root.title("HI")
 app=Room_GUI(root)
