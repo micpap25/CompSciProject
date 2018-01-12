@@ -112,7 +112,7 @@ class Room_GUI(tkinter.Frame):
     def l_destroy(self):
         self.l.destroy()
         Room(self.player)
-#hi
+#hio
 root=tkinter.Tk()
 root.title("HI")
 app=Room_GUI(root)
