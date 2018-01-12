@@ -1,5 +1,5 @@
-Goblin, 60, 45, 70
+Goblin, 50, 55, 50
 Skeleton, 20, 80, 60
 Slime, 100, 10, 30
-Bat, 10, 10, 80
+Bat, 10, 10, 90
 DABoss, 165, 50, 75

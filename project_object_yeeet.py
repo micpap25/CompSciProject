@@ -1,6 +1,7 @@
 #all objects
 #IDIDIT
 import random
+from enemy_load import EnemyList
 class Characters(object):
     def __init__(self,list1):
       #we can make inventory a list
@@ -82,24 +83,29 @@ class Player(Characters):
                     self.hp+=20
                     print(str(self.hp))
                     return update
+
                 elif luck in [8]:
                     self.attck+=10
                     print(str(self.attck))
                     update="You found a potion of attack! You gain 10 attck!"
                     return update
+
                 elif luck in [9]:
                     self.speed+=10
                     print(str(self.speed))
                     update="You found a potion of speed! You gain 10 speed!"
                     return update
+
                 elif luck in [10, 11]:
                     self.inventory.append("Wand of Defence")
                     update="You found a wand of defence. It negates any damage! (One use)"
                     return update
+
                 elif luck in [12]:
                     self.inventory.append("Light sword!")
                     update="Finally! You found the light sword! It multiplies your damage by 2!(passive)"
                     return update
+
 
             elif luck in [13,14,15]:
                 if luck==13:
@@ -118,6 +124,7 @@ class Player(Characters):
                     self.hp-=25
                     update='Ouch! You stepped on a spike!'
                     return update
+            self.spawn_enemys()
 
     def use_item(self, item):
         #might not be helpful
@@ -137,13 +144,28 @@ class Player(Characters):
 
 #includes bosses and bogies
 class Room(object):
-  def __init__(self,doors,you,charlist,loot=0,vertPos=0,horiPos=0):
-      self.doors=doors
-      self.you=you
-      self.loot=loot
-      self.library=charlist
-      self.vertPos=vertPos
-      self.horiPos=horiPos
+    def __init__(self,doors,you,charlist,loot=0,vertPos=0,horiPos=0, intensity = 0):
+        self.doors=doors
+        self.you=you
+        self.loot=loot
+        self.library=charlist
+        self.vertPos=vertPos
+        self.horiPos=horiPos
+        self.intensity = intensity
+        self.e = EnemyList("All_DA_Enemies")
+        self.enemies = self.e.load_chars()
+
+    def spawn_enemys(self, player):
+        event=player.event
+        if event>=30 + self.intensity:
+            player.in_battle=True
+            self.num = random.randrange(0, 20) + event
+        if self.num >=65:
+            enemy = self.enemies[4]
+
+
+
+
 
 
 
