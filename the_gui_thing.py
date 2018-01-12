@@ -1,4 +1,5 @@
 import random
+from battle import Screen_Battle
 from project_object_yeeet import Characters,Room,Player
 from character_make import CharList
 import tkinter
@@ -53,6 +54,7 @@ class Room_GUI(tkinter.Frame):
             widget.destroy()
         self.Room_widgets()
         self.moveButton()
+        self.searchButton()
         self.grid()
     def Room_widgets(self):
         imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
