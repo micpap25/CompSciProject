@@ -95,6 +95,7 @@ class Room_GUI(tkinter.Frame):
         self.south.destroy()
         self.west.destroy()
         self.north.destroy()
+        Room(self.player)
         self.moveButton()
     def searchButton(self):
         self.search_bttn = tkinter.Button(self, text = "Search", command = self.searching)
@@ -102,10 +103,11 @@ class Room_GUI(tkinter.Frame):
     def searching(self):
         p = self.player.search()
         self.l = tkinter.Label(self, text=p)
-        self.l.grid(row=6,column=0)
+        self.l.grid(row=6,column=0,columnspan=5)
         root.after(3000,self.l_destroy)
     def l_destroy(self):
         self.l.destroy()
+        Room(self.player)
 
 root=tkinter.Tk()
 root.title("HI")

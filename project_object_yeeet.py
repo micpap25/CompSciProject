@@ -1,6 +1,7 @@
 #all objects
 #IDIDIT
 import random
+from battle_manager import Battle_Manager
 class Characters(object):
     def __init__(self,list1):
       #we can make inventory a list
@@ -132,19 +133,32 @@ class Player(Characters):
             update="You don't have that item."
             return update
 
+class EnemyList(object):
+    def __init__(self, file_name):
+        self.file_name = file_name
+        self.load_chars()
+    def load_chars(self):
+        self.enemy_list = []
 
+        text_file = open(self.file_name, "r")
+
+        for line in text_file:
+            line = line.strip()
+            my_fields = line.split(",")
+            enemy = Characters(my_fields)
+            self.enemy_list.append(enemy)
 
 
 #includes bosses and bogies
 class Room(object):
-  def __init__(self,doors,you,charlist,loot=0,vertPos=0,horiPos=0):
-      self.doors=doors
+  def __init__(self,you):
       self.you=you
-      self.loot=loot
-      self.library=charlist
-      self.vertPos=vertPos
-      self.horiPos=horiPos
-
+      self.library=EnemyList("All_DA_Enemies.txt")
+      self.battle=Battle_Manager
+      self.spawn()
+  def spawn(self):
+        if self.you.event>10:
+            self.battle(self.you,self.library.enemy_list[0])
 
 
 class charlist(object):
