@@ -54,7 +54,6 @@ class Room_GUI(tkinter.Frame):
             widget.destroy()
         self.Room_widgets()
         self.moveButton()
-        self.searchButton()
         self.grid()
     def Room_widgets(self):
         imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
@@ -97,8 +96,8 @@ class Room_GUI(tkinter.Frame):
         self.south.destroy()
         self.west.destroy()
         self.north.destroy()
-        self.searchButton()
         Room(self.player)
+        self.searchButton()
         self.moveButton()
     def searchButton(self):
         self.search_bttn = tkinter.Button(self, text = "Search", command = self.searching)

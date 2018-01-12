@@ -17,31 +17,31 @@ class Screen_prepare_to_battle (tkinter.Frame):
     
     def create_widgets (self):
         tkinter.Label(self,text="you").grid()
-        imageSmall = tkinter.PhotoImage(file="Images/" + self.player1.pic)
-        self.image_ref = imageSmall
-        w = tkinter.Label(self,
-                          image=imageSmall,
-                          )
-        w.photo = imageSmall
-        w.grid(row=1, column=0)
+        #imageSmall = tkinter.PhotoImage(file="Images/" + self.player1.pic)
+        #self.image_ref = imageSmall
+        #w = tkinter.Label(self,
+        #                 image=imageSmall,
+        #                  )
+        #w.photo = imageSmall
+        #w.grid(row=1, column=0)
         tkinter.Label(self, text="VS",font=30).grid(row=1, column=1)
         tkinter.Label(self, text="enemy").grid(row=0,column=2)
-        imageSmall = tkinter.PhotoImage(file="Images/" + self.player2.pic)
-        self.image_ref = imageSmall
-        w = tkinter.Label(self,
-                          image=imageSmall,
-                          )
-        w.photo = imageSmall
+        #imageSmall = tkinter.PhotoImage(file="Images/" + self.player2.pic)
+        #self.image_ref = imageSmall
+        #w = tkinter.Label(self,
+         #                 image=imageSmall,
+         #                 )
+        #w.photo = imageSmall
 
-        w.grid(row=1, column=2)
+        #w.grid(row=1, column=2)
         row1 =2
         column1=0
         for i in [self.player1,self.player2]:
-            tkinter.Label(self,text= "health: " + str(i.hit_points)).grid(row=row1,column=column1)
+            tkinter.Label(self,text= "health: " + str(i.hp)).grid(row=row1,column=column1)
             row1 +=1
-            tkinter.Label(self, text= "strength: "+ str(i.strength)).grid(row=row1,column=column1)
+            tkinter.Label(self, text= "strength: "+ str(i.attck)).grid(row=row1,column=column1)
             row1 += 1
-            tkinter.Label(self, text="dexterity: " + str(i.dexterity)).grid(row=row1,column=column1)
+            tkinter.Label(self, text="dexterity: " + str(i.speed)).grid(row=row1,column=column1)
             column1+=2
             row1=2
         self.next = tkinter.Button(self, text="To battle", command=self.continue_clicked,bg="red")

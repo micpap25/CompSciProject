@@ -22,7 +22,9 @@ class Characters(object):
                 enemy.inventory.remove("Wand of Defence")
                 result = enemy.name + " used the Wand of Defense! No damage is taken!"
                 return result
-            enemy.hit_points -= damage
+            else:
+                damage=damage
+            enemy.hp -= damage
             result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
             return result
         else:
@@ -55,7 +57,7 @@ class Player(Characters):
 
         elif (hit_attempt <= self.speed) and "Light sword" not in self.inventory:
             damage = random.randrange(0, self.attck)
-            enemy.hit_points -= damage
+            enemy.hp -= damage
             result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
             return result
         else:
