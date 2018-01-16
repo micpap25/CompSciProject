@@ -16,8 +16,11 @@ class Room_GUI(tkinter.Frame):
         self.grid()
         # self.alerts()
     def select_character(self):
+        c = CharList("All_DA_Characters.txt")
+        self.chars = c.load_chars()
         self.character = tkinter.StringVar()
-
+        for widget in self.winfo_children():
+            widget.destroy()
         self.character.set(None)
         self.hp = tkinter.Label(self, text="Hit Points")
         self.hp.grid(row=0, column=2, sticky=tkinter.W)
@@ -54,15 +57,15 @@ class Room_GUI(tkinter.Frame):
             widget.destroy()
         self.Room_widgets()
         self.moveButton()
-        self.searchButton()
         self.grid()
+        self.items()
     def Room_widgets(self):
-        imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
-        w = tkinter.Label(self,
-                          image=imageSmall,
+        self.imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
+        self.w = tkinter.Label(self,
+                          image=self.imageSmall,
                           )
-        w.photo = imageSmall
-        w.grid(row = 1, column = 1, columnspan = 2, sticky = tkinter.W)
+        self.w.photo = self.imageSmall
+        self.w.grid(row = 1, column = 1, columnspan = 2, sticky = tkinter.W)
         self.searchButton()
     def moveButton(self):
         p = random.randrange(0, 3)
@@ -85,21 +88,32 @@ class Room_GUI(tkinter.Frame):
 
         if p <= 3:
             self.east.grid(row=1, column=3, sticky=tkinter.W)
+
         self.move_bttn = tkinter.Button(self, text="Move", command=self.moving)
         self.move_bttn.grid(row=2, column=3, sticky=tkinter.W)
     def moving(self):
         self.player.event += 5
-        imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
-        w = tkinter.Label(self,image = imageSmall,)
-        w.photo = imageSmall
-        w.grid(row=1, column=1, columnspan=2, sticky=tkinter.W)
+        self.imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
+        self.w = tkinter.Label(self,image = self.imageSmall,)
+        self.w.photo = self.imageSmall
+        self.w.grid(row=1, column=1, columnspan=2, sticky=tkinter.W)
         self.east.destroy()
         self.south.destroy()
         self.west.destroy()
         self.north.destroy()
         self.searchButton()
-        Room(self.player)
-        self.moveButton()
+        if self.player.hp>0:
+            Room(self.player)
+
+        if self.player.hp>0:
+            self.moveButton()
+        if self.player.hp<=0:
+            for widget in self.winfo_children():
+                widget.destroy()
+            self.p = tkinter.Label(self, text="You Lose")
+            self.p.grid()
+            self.replay = tkinter.Button(self, text="replay?", command=self.select_character)
+            self.replay.grid()
     def searchButton(self):
         self.search_bttn = tkinter.Button(self, text = "Search", command = self.searching)
         self.search_bttn.grid(row = 2, column = 0, sticky = tkinter.W)
@@ -109,10 +123,36 @@ class Room_GUI(tkinter.Frame):
         self.l = tkinter.Label(self, text=p)
         self.l.grid(row=6,column=0,columnspan=5)
         root.after(3000,self.l_destroy)
+        if self.player.hp>0:
+            Room(self.player)
+        self.items()
+        if self.player.hp<=0:
+            for widget in self.winfo_children():
+                widget.destroy()
+            self.p = tkinter.Label(self,text="You Lose")
+            self.p.grid()
+            self.replay=tkinter.Button(self,text="replay?",command=self.select_character)
+            self.replay.grid()
     def l_destroy(self):
         self.l.destroy()
-        Room(self.player)
-#hio
+
+    def items(self):
+        self.info = ""
+        self.menuVar = tkinter.StringVar()
+        self.list = self.player.inventory
+        if len(self.list) > 0:
+            self.menuVar.set(self.list[0])
+            self.show = tkinter.OptionMenu(self, self.menuVar, *self.list)
+            self.show.grid(row=4, column=0, sticky=tkinter.W)
+            self.useItem = tkinter.Button(self, text="Use item", command=self.using)
+            self.useItem.grid(row=4, column=1, sticky=tkinter.W)
+            self.information = tkinter.Label(self, text=self.show)
+            self.information.grid(row=5, column=0, sticky=tkinter.W)
+
+    def using(self):
+        self.menuVar.get()
+        self.info = self.player.use_item(str(self.menuVar))
+#hi
 root=tkinter.Tk()
 root.title("HI")
 app=Room_GUI(root)
