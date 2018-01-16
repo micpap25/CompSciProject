@@ -18,15 +18,13 @@ class Characters(object):
         if (hit_attempt <= self.speed):
             damage = random.randrange(0, self.attck)
             if damage > enemy.hp and "Wand of Defence" in enemy.inventory:
-                damage = 0
                 enemy.inventory.remove("Wand of Defence")
                 result = enemy.name + " used the Wand of Defense! No damage is taken!"
                 return result
             else:
-                damage=damage
-            enemy.hp -= damage
-            result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
-            return result
+                enemy.hp -= damage
+                result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
+                return result
         else:
             result = self.name + " misses " + enemy.name + "."
 
