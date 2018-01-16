@@ -107,12 +107,14 @@ class Room_GUI(tkinter.Frame):
         if self.player.hp>0:
             self.moveButton()
         if self.player.hp<=0:
+
             for widget in self.winfo_children():
                 widget.destroy()
             self.p = tkinter.Label(self, text="You Lose")
             self.p.grid()
             self.replay = tkinter.Button(self, text="replay?", command=self.select_character)
             self.replay.grid()
+
     def searchButton(self):
         self.search_bttn = tkinter.Button(self, text = "Search", command = self.searching)
         self.search_bttn.grid(row = 2, column = 0, sticky = tkinter.W)
