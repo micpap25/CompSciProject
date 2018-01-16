@@ -123,18 +123,18 @@ class Player(Characters):
 
     def use_item(self, item):
         #might not be helpful
+        self.update= ""
         if item=="Potion":
             self.inventory.remove("Potion")
             self.hp+=20
-            update='You healed 20 damage, your health is now'+str(self.hp)
-            return update
+            self.update='You healed 20 damage, your health is now'+str(self.hp)
+            return self.update
         elif item=="Wand of Defence":
-            update = "You should save that for battle."
-            return update
+            self.update = "You should save that for battle."
+            return self.update
         elif item == "Light sword!":
-            self.attck*=2
-            update = "You swing the sword a little. It's pretty cool."
-            return update
+            self.update = "You swing the sword a little. It's pretty cool."
+            return self.update
 
 class EnemyList(object):
     def __init__(self, file_name):

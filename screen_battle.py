@@ -3,13 +3,12 @@ import random
 class Screen_Battle (tkinter.Frame):
     def __init__ (self, master, player1, player2, call_on_next):
         super(Screen_Battle, self).__init__(master)
-
+        # Make a variable so that max HP is set up only once
         # Save references to the two player objects
         self.player1 = player1
         self.player2 = player2
-
         # Store the maximum number of hit points which are needed on the screen display.
-        self.player1_max_hp = player1.hp
+        self.player1_max_hp = player1.hp #Need to fix these, max HP is going down to current HP
         self.player2_max_hp = player2.hp
 
         # Save the method reference to which we return control after this page Exits.

@@ -145,12 +145,12 @@ class Room_GUI(tkinter.Frame):
             self.show.grid(row=4, column=0, sticky=tkinter.W)
             self.useItem = tkinter.Button(self, text="Use item", command=self.using)
             self.useItem.grid(row=4, column=1, sticky=tkinter.W)
-            self.information = tkinter.Label(self, text=self.show)
+            self.information = tkinter.Label(self, text=self.info)
             self.information.grid(row=5, column=0, sticky=tkinter.W)
 
     def using(self):
-        self.menuVar.get()
-        self.info = self.player.use_item(str(self.menuVar))
+        k = self.menuVar.get()
+        self.info = self.player.use_item(str(k))
 #hi
 root=tkinter.Tk()
 root.title("HI")
