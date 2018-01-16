@@ -17,7 +17,7 @@ class Characters(object):
         hit_attempt = random.randrange(0, total_dex)
         if (hit_attempt <= self.speed):
             damage = random.randrange(0, self.attck)
-            if damage > enemy.hp and "Wand of Defence" in enemy.inventory:
+            if (damage > enemy.hp) and ("Wand of Defence" in enemy.inventory):
                 enemy.inventory.remove("Wand of Defence")
                 result = enemy.name + " used the Wand of Defense! No damage is taken!"
                 return result
