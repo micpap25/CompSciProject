@@ -43,7 +43,7 @@ class Player(Characters):
         Characters.__init__(self,[p.name,p.hp,p.attck,p.speed,p.pic,])
         self.in_battle = False
         self.event = 0
-        self.inventory = []
+        self.inventory = ["Potion"]
 
     def s_attack(self, enemy):
         total_dex = self.speed + enemy.speed
