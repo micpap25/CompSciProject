@@ -1,5 +1,5 @@
-Goblin, 60, 45, 70, gob.png
-Skeleton, 20, 80, 60, skel.png
-Slime, 100, 10, 30, slime.png
 Bat, 10, 10, 80, bat.png
+Slime, 120, 5, 10, slime.png
+Skeleton, 20, 80, 50, skel.png
+Goblin, 60, 45, 70, gob.png
 DABoss, 165, 50, 75, Da_boss.png
