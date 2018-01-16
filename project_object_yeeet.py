@@ -43,7 +43,7 @@ class Player(Characters):
         Characters.__init__(self,[p.name,p.hp,p.attck,p.speed,p.pic,])
         self.in_battle = False
         self.event = 0
-        self.inventory = ["Potion"]
+        self.inventory = ["Potion", "Wand of Defence"]
 
     def s_attack(self, enemy):
         total_dex = self.speed + enemy.speed
@@ -128,13 +128,11 @@ class Player(Characters):
             self.inventory.remove("Potion")
             self.hp+=20
             self.update='You healed 20 damage, your health is now'+str(self.hp)
-            return self.update
         elif item=="Wand of Defence":
             self.update = "You should save that for battle."
-            return self.update
         elif item == "Light sword!":
             self.update = "You swing the sword a little. It's pretty cool."
-            return self.update
+        return self.update
 
 class EnemyList(object):
     def __init__(self, file_name):
