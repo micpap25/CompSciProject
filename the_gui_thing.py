@@ -104,7 +104,6 @@ class Room_GUI(tkinter.Frame):
         self.searchButton()
         if self.player.hp>0:
             Room(self.player)
-
         if self.player.hp>0:
             self.moveButton()
         if self.player.hp<=0:

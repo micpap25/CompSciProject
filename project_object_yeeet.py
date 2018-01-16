@@ -82,7 +82,6 @@ class Player(Characters):
                 if luck in [6,7]:
                     self.inventory.append("Potion")
                     update="You found a potion, it will heal 20 hp! It can even overheal!"
-                    self.hp+=20
                     print(str(self.hp))
                     return update
                 elif luck in [8]:
@@ -133,6 +132,7 @@ class Player(Characters):
             update = "You should save that for battle."
             return update
         elif item == "Light sword!":
+            self.attck*=2
             update = "You swing the sword a little. It's pretty cool."
             return update
 
@@ -160,7 +160,15 @@ class Room(object):
       self.battle=Battle_Manager
       self.spawn()
   def spawn(self):
-        if self.you.event>10:
+        if self.you.event > 50:
+            self.battle(self.you, self.library.enemy_list[4])
+        elif self.you.event > 40:
+            self.battle(self.you, self.library.enemy_list[3])
+        elif self.you.event > 30:
+            self.battle(self.you, self.library.enemy_list[2])
+        elif self.you.event>20:
+            self.battle(self.you,self.library.enemy_list[1])
+        elif self.you.event>10:
             self.battle(self.you,self.library.enemy_list[0])
 
 

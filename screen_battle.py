@@ -70,6 +70,7 @@ class Screen_Battle (tkinter.Frame):
                 tkinter.Label(self,text="DEAD",font=30).grid(row=1,column=2)
                 tkinter.Label(self,text="You win", font=30).grid(column=1)
                 self.end.grid(column=3)
+                self.player1.event-=5
                 self.next.destroy()
             elif self.player1.hp <=0:
                 tkinter.Label(self, text="DEAD", font=30).grid(row=1, column=0)

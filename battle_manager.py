@@ -18,7 +18,7 @@ class Battle_Manager (object):
         self.player=player
         self.root = tkinter.Tk()
         self.onclose_character_selector()
-               
+#hi
     def onclose_character_selector (self):
         ''' This method is called when the Screen_character_selector closes. 
             selected_char should contain the index in the list of the character selected by the user. 

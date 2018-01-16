@@ -13,7 +13,7 @@ class Screen_prepare_to_battle (tkinter.Frame):
         
         self.create_widgets()
         self.grid()
-        
+#hi
     
     def create_widgets (self):
         tkinter.Label(self,text="you").grid()
