@@ -138,7 +138,6 @@ class Room_GUI(tkinter.Frame):
         self.l.destroy()
 
     def items(self):
-        self.info = ""
         self.menuVar = tkinter.StringVar()
         self.list = self.player.inventory
         if len(self.list) > 0:
@@ -155,6 +154,7 @@ class Room_GUI(tkinter.Frame):
         info = self.player.use_item(str(k))
         self.information.delete(0.0, tkinter.END)
         self.information.insert(0.0, info)
+        self.list = self.player.inventory
 
 #hi
 root=tkinter.Tk()
