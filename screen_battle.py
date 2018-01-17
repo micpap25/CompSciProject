@@ -1,7 +1,7 @@
 import tkinter
 import random
 class Screen_Battle (tkinter.Frame):
-    def __init__ (self, master, player1, player2, call_on_next):
+    def __init__ (self, master, player1, player2, call_on_next,):
         super(Screen_Battle, self).__init__(master)
         # Make a variable so that max HP is set up only once
         # Save references to the two player objects
@@ -93,7 +93,7 @@ class Screen_Battle (tkinter.Frame):
                                             
     def exit_clicked(self):
         ''' This method is called when the Exit button is clicked. 
-            It passes control back to the callback method. '''        
+            It passes control back to the callback method. '''
         self.call_on_selected()
   
             

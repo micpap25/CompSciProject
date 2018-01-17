@@ -1,9 +1,8 @@
-import tkinter
 
 #
 # No changes are required in this file.
 #
-
+import tkinter
 from screen_battle import Screen_Battle
 from screen_prepare_to_battle import Screen_prepare_to_battle
 from characters import CharacterList
