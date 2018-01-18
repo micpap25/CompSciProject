@@ -63,7 +63,7 @@ class Room_GUI(tkinter.Frame):
         self.searchButton()
         self.items()
     def Room_widgets(self):
-        self.imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
+        self.imageSmall = tkinter.PhotoImage(file="images/dwarf.jpg")
         self.w = tkinter.Label(self,
                           image=self.imageSmall,
                           )
@@ -95,7 +95,7 @@ class Room_GUI(tkinter.Frame):
         self.move_bttn.grid(row=2, column=3, sticky=tkinter.W)
     def moving(self):
         self.player.event += 5
-        self.imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
+        self.imageSmall = tkinter.PhotoImage(file="images\dungeon.png")
         self.w = tkinter.Label(self,image = self.imageSmall,)
         self.w.photo = self.imageSmall
         self.w.grid(row=1, column=1, columnspan=2, sticky=tkinter.W)
