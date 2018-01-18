@@ -2,6 +2,8 @@
 #IDIDIT
 import random
 from battle_manager import Battle_Manager
+import tkinter
+import time
 class Characters(object):
     def __init__(self,list1):
       #we can make inventory a list
@@ -147,17 +149,17 @@ class EnemyList(object):
             enemy = Characters(my_fields)
             self.enemy_list.append(enemy)
 
-
 #includes bosses and bogies
 class Room(object):
-  def __init__(self,you):
+  def __init__(self,you,da_boss):
       self.you=you
       self.library=EnemyList("All_DA_Enemies.txt")
       self.battle=Battle_Manager
+      self.da_boss=da_boss
       self.spawn()
   def spawn(self):
         if self.you.event > 50:
-            self.battle(self.you, self.library.enemy_list[4])
+            self.b = self.battle(self.you,self.da_boss)
         elif self.you.event > 40:
             self.battle(self.you, self.library.enemy_list[3])
         elif self.you.event > 30:
@@ -166,6 +168,7 @@ class Room(object):
             self.battle(self.you,self.library.enemy_list[1])
         elif self.you.event>10:
             self.battle(self.you,self.library.enemy_list[0])
+
 
 
 class charlist(object):

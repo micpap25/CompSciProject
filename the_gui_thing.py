@@ -1,9 +1,10 @@
 import random
 from battle import Screen_Battle
-from project_object_yeeet import Characters,Room,Player
+from project_object_yeeet import Characters,Room,Player,EnemyList
 from character_make import CharList
 import tkinter
 import time
+da_boss=Characters(["DABoss", 15, 50, 5, "Da_boss.png"])
 class Room_GUI(tkinter.Frame):
     def __init__(self,master):#,Charachters,Room,Loot_crate):
         super(Room_GUI,self).__init__(master)
@@ -66,7 +67,6 @@ class Room_GUI(tkinter.Frame):
                           )
         self.w.photo = self.imageSmall
         self.w.grid(row = 1, column = 1, columnspan = 2, sticky = tkinter.W)
-        self.searchButton()
     def moveButton(self):
         p = random.randrange(0, 3)
         self.direction = tkinter.StringVar()
@@ -102,9 +102,16 @@ class Room_GUI(tkinter.Frame):
         self.west.destroy()
         self.north.destroy()
         self.searchButton()
-        if self.player.hp>0:
-            Room(self.player)
-        if self.player.hp>0:
+        if da_boss.hp<=0 and self.player.hp>0:
+            for widget in self.winfo_children():
+                widget.destroy()
+            self.p = tkinter.Label(self, text="YOU WIN!")
+            self.p.grid()
+            self.replay = tkinter.Button(self, text="replay?", command=self.select_character)
+            self.replay.grid()
+        if da_boss.hp>0:
+            MyDialog(root, self.player)
+        if da_boss.hp > 0:
             self.moveButton()
         if self.player.hp<=0:
 
@@ -124,9 +131,16 @@ class Room_GUI(tkinter.Frame):
         self.l = tkinter.Label(self, text=p)
         self.l.grid(row=6,column=0,columnspan=5)
         root.after(3000,self.l_destroy)
-        if self.player.hp>0:
-            Room(self.player)
         self.items()
+        if da_boss.hp<=0 and self.player.hp>0:
+            for widget in self.winfo_children():
+                widget.destroy()
+            self.p = tkinter.Label(self, text="YOU WIN!")
+            self.p.grid()
+            self.replay = tkinter.Button(self, text="replay?", command=self.select_character)
+            self.replay.grid()
+        if da_boss.hp>0:
+            MyDialog(root,self.player)
         if self.player.hp<=0:
             for widget in self.winfo_children():
                 widget.destroy()
@@ -156,7 +170,11 @@ class Room_GUI(tkinter.Frame):
         self.information.insert(0.0, info)
         self.list = self.player.inventory
 
-#hi
+class MyDialog:
+
+    def __init__(self, parent,player):
+        self.player=player
+        Room(self.player,da_boss)
 root=tkinter.Tk()
 root.title("HI")
 app=Room_GUI(root)

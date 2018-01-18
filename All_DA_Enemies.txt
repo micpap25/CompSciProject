@@ -3,3 +3,4 @@ Slime, 100, 25, 20, slime.png
 Skeleton, 40, 80, 50, skel.png
 Goblin, 60, 55, 70, gob.png
 DABoss, 145, 70, 75, Da_boss.png
+
