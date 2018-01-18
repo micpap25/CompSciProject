@@ -55,9 +55,7 @@ class Screen_Battle(Frame):
         '''
         This method creates all of the widgets for the battle page.
         '''
-        #
-        # TO DO
-        #
+       #There we go
 
     def attack_clicked(self):
         self.attack1 = self.player1.s_attack(self.player2)
