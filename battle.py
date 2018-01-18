@@ -23,10 +23,10 @@ class Screen_Battle(Frame):
         a = Label(text='You')
         a.grid(row=0, column=0, sticky=W, columnspan=2)
 
-        imageSmall = PhotoImage(file="images/" + self.player1.large_image)
-        w = Label(self, image=imageSmall)
-        w.photo = imageSmall
-        w.grid(row=1, column=0, sticky=W, columnspan=2)
+        p1image = PhotoImage(file="images/" + self.player1.pic)
+        w = Label(self, image=p1image)
+        w.photo = p1image
+        w.grid(row=1, column=0, sticky=E, columnspan=2)
 
         self.hp1 = Label(text='HP-' + str(self.player1.hit_points) + '/' + str(self.player1_max_hp))
         self.hp1.grid(row=2, column=0, sticky=W, columnspan=2)
@@ -36,17 +36,17 @@ class Screen_Battle(Frame):
         b = Label(text='Computer')
         b.grid(row=0, column=3, sticky=E, columnspan=2)
 
-        mageSmall = PhotoImage(file="images/" + self.player2.large_image)
-        w = Label(self, image=mageSmall)
-        w.photo = mageSmall
-        w.grid(row=1, column=3, sticky=E, columnspan=2)
 
         self.hp2 = Label(text='HP-' + str(self.player2.hit_points) + "/" + str(self.player2_max_hp))
         self.hp2.grid(row=2, column=3, sticky=E, columnspan=2)
 
+        p2image = PhotoImage(file = "images/" + self.player2.pic)
+        k = Label(self, image = p2image)
+        k.photo = p1image
+        k.grid(row = 1, column = 3, columnspan = 2)
+
         self.update = Label(text='')
         self.update.grid(row=6, column=2, columnspan=2)
-
         self.attack = Button(text="Attack", command=self.attack_clicked)
         self.attack.grid(row=5, column=2, columnspan=2)
 

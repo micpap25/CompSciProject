@@ -173,6 +173,9 @@ class Room_GUI(tkinter.Frame):
         self.information.delete(0.0, tkinter.END)
         self.information.insert(0.0, info)
         self.list = self.player.inventory
+        self.show.destroy()
+        self.show = tkinter.OptionMenu(self, self.menuVar, *self.list)
+        self.show.grid(row=4, column=0, sticky=tkinter.W)
 
 class MyDialog:
 
