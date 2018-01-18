@@ -51,7 +51,7 @@ class Player(Characters):
         if (hit_attempt <= self.speed) and "Light sword" in self.inventory:
             damage = random.randrange(0, self.attck)
             damage=damage*2
-            enemy.hit_points -= damage
+            enemy.hp -= damage
             result = self.name + " hits " + enemy.name + " causing " + str(damage) + " damage."
             return result
 
@@ -120,15 +120,53 @@ class Player(Characters):
                     self.hp-=25
                     update='Ouch! You stepped on a spike!'
                     return update
+    def search1(self):
+        if self.in_battle==True:
+            update="You cannot search for loot in battle! Are you crazy?"
+            return update
+        else:
+            luck=random.randint(1,12)
+            #now we can make 1-5 empty, 6-12 loot of increasing value(6-8 low) (9-11 middle)(12-godlike), and 13-15......TRAPS!!!(insert evil laugh)
+            if luck in [1,2,3,4,5]:
+                update="the monster dropped nothing."
+                return update
+                #empty chest
+            elif luck in [6,7,8,9,10,11,12]:
+                if luck in [6,7]:
+                    self.inventory.append("monster blood")
+                    update="the monsters blood has healing properties it will heal you 20 hp!"
+                    print(str(self.hp))
+                    return update
+                elif luck in [8]:
+                    self.attck+=10
+                    print(str(self.attck))
+                    update="a strange sword on th monster increases your attack. You gain 10 attck!"
+                    return update
+                elif luck in [9]:
+                    self.speed+=10
+                    print(str(self.speed))
+                    update="a strange relic on th monster increases your speed! You gain 10 speed!"
+                    return update
+                elif luck in [10, 11]:
+                    self.inventory.append("mosnters stick")
+                    update="the monster dropped a strange stick it casts a blue aura around you! (invincibilityy One use)"
+                    return update
+                elif luck in [12]:
+                    self.inventory.append("Light sword!")
+                    update="Finally! You found the light sword! It multiplies your damage by 2!(passive)"
+                    return update
 
     def use_item(self, item):
         #might not be helpful
         self.update= ""
-        if item=="Potion":
-            self.inventory.remove("Potion")
+        if item=="Potion" or  item=="monster blood":
+            if item == "Potion":
+                self.inventory.remove("Potion")
+            if item=="monster blood":
+                self.inventory.remove("monster blood")
             self.hp+=20
             self.update='You healed 20 damage, your health is now'+str(self.hp)
-        elif item=="Wand of Defence":
+        elif item=="Wand of Defence" or item=="monsters stick":
             self.update = "You should save that for battle."
         elif item == "Light sword!":
             self.update = "You swing the sword a little. It's pretty cool."
@@ -145,7 +183,7 @@ class EnemyList(object):
 
         for line in text_file:
             line = line.strip()
-            my_fields = line.split(",")
+            my_fields = line.split(", ")
             enemy = Characters(my_fields)
             self.enemy_list.append(enemy)
 

@@ -4,7 +4,7 @@ from project_object_yeeet import Characters,Room,Player,EnemyList
 from character_make import CharList
 import tkinter
 import time
-da_boss=Characters(["DABoss", 15, 50, 5, "Da_boss.png"])
+
 class Room_GUI(tkinter.Frame):
     def __init__(self,master):#,Charachters,Room,Loot_crate):
         super(Room_GUI,self).__init__(master)
@@ -22,6 +22,7 @@ class Room_GUI(tkinter.Frame):
         self.character = tkinter.StringVar()
         for widget in self.winfo_children():
             widget.destroy()
+        self.da_boss=Characters(["DABoss", 150, 50, 65, "Da_boss.png"])
         self.character.set(None)
         self.hp = tkinter.Label(self, text="Hit Points")
         self.hp.grid(row=0, column=2, sticky=tkinter.W)
@@ -59,6 +60,7 @@ class Room_GUI(tkinter.Frame):
         self.Room_widgets()
         self.moveButton()
         self.grid()
+        self.searchButton()
         self.items()
     def Room_widgets(self):
         self.imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
@@ -101,17 +103,19 @@ class Room_GUI(tkinter.Frame):
         self.south.destroy()
         self.west.destroy()
         self.north.destroy()
-        self.searchButton()
-        if da_boss.hp<=0 and self.player.hp>0:
+        if self.search_bttn.winfo_exists()==0:
+            self.searchButton()
+
+        if self.da_boss.hp<=0 and self.player.hp>0:
             for widget in self.winfo_children():
                 widget.destroy()
             self.p = tkinter.Label(self, text="YOU WIN!")
             self.p.grid()
             self.replay = tkinter.Button(self, text="replay?", command=self.select_character)
             self.replay.grid()
-        if da_boss.hp>0:
-            MyDialog(root, self.player)
-        if da_boss.hp > 0:
+        if self.da_boss.hp>0 and self.player.hp>0:
+            MyDialog(root, self.player,self.da_boss)
+        if self.da_boss.hp > 0:
             self.moveButton()
         if self.player.hp<=0:
 
@@ -132,15 +136,16 @@ class Room_GUI(tkinter.Frame):
         self.l.grid(row=6,column=0,columnspan=5)
         root.after(3000,self.l_destroy)
         self.items()
-        if da_boss.hp<=0 and self.player.hp>0:
+        if self.da_boss.hp<=0 and self.player.hp>0:
             for widget in self.winfo_children():
                 widget.destroy()
             self.p = tkinter.Label(self, text="YOU WIN!")
             self.p.grid()
             self.replay = tkinter.Button(self, text="replay?", command=self.select_character)
             self.replay.grid()
-        if da_boss.hp>0:
-            MyDialog(root,self.player)
+        if self.da_boss.hp > 0 and self.player.hp > 0:
+            MyDialog(root,self.player, self.da_boss)
+
         if self.player.hp<=0:
             for widget in self.winfo_children():
                 widget.destroy()
@@ -149,8 +154,7 @@ class Room_GUI(tkinter.Frame):
             self.replay=tkinter.Button(self,text="replay?",command=self.select_character)
             self.replay.grid()
     def l_destroy(self):
-        self.l.destroy()
-
+            self.l.destroy()
     def items(self):
         self.menuVar = tkinter.StringVar()
         self.list = self.player.inventory
@@ -172,7 +176,7 @@ class Room_GUI(tkinter.Frame):
 
 class MyDialog:
 
-    def __init__(self, parent,player):
+    def __init__(self, parent,player,da_boss):
         self.player=player
         Room(self.player,da_boss)
 root=tkinter.Tk()

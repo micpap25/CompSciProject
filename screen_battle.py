@@ -13,24 +13,24 @@ class Screen_Battle (tkinter.Frame):
 
         # Save the method reference to which we return control after this page Exits.
         self.call_on_selected = call_on_next
-
+        self.item()
         self.create_widgets()
         self.grid()
         
     def create_widgets (self):
-        tkinter.Label(self, text="you").grid()
+        tkinter.Label(self, text="you").grid(row=0)
         '''
-        #imageSmall = tkinter.PhotoImage(file="images/" + self.player1.small_image)
-        #w = tkinter.Label(self,
-         #                 image=imageSmall,
+        imageSmall = tkinter.PhotoImage(file="images/" + self.player1.pic)
+        w = tkinter.Label(self,
+                         image=imageSmall,
                           )
-        #w.photo = imageSmall
-        #w.grid(row=1, column=0)
+        w.photo = imageSmall
+        w.grid(row=1, column=0)
         '''
         tkinter.Label(self, text="VS", font=30).grid(row=1, column=1)
         tkinter.Label(self, text="enemy").grid(row=0, column=2)
         '''
-        imageSmall = tkinter.PhotoImage(file="images/" + self.player2.small_image)
+        imageSmall = tkinter.PhotoImage(file="images/" + self.player2.pic)
         w = tkinter.Label(self,
                           image=imageSmall,
                           )
@@ -41,10 +41,27 @@ class Screen_Battle (tkinter.Frame):
         tkinter.Label(self, text="health: " + str(self.player1.hp)+"/"+ str(self.player1_max_hp)).grid(row=2, column=0)
         tkinter.Label(self, text="health: " + str(self.player2.hp) + "/" + str(self.player2_max_hp)).grid(row=2,column=2)
         self.next = tkinter.Button(self, text="Attack", command=self.attack_clicked, bg="red")
+        self.end = tkinter.Button(self, text="END", command=self.exit_clicked)
         self.next.grid(row=5, column=4)
+    def item(self):
+        self.menuVar = tkinter.StringVar()
+        self.list = self.player1.inventory
+        if len(self.list) > 0:
+            self.menuVar.set(self.list[0])
+            self.show = tkinter.OptionMenu(self, self.menuVar, *self.list)
+            self.show.grid(row=6, column=0, sticky=tkinter.W)
+            self.useItem = tkinter.Button(self, text="Use item", command=self.using)
+            self.useItem.grid(row=6, column=1, sticky=tkinter.W)
+            self.information = tkinter.Text(self, wrap=tkinter.WORD, width=15, height=5)
+            self.information.grid(row=7, column=0, sticky=tkinter.W)
 
+    def using(self):
+        k = self.menuVar.get()
+        info = self.player1.use_item(str(k))
+        self.information.delete(0.0, tkinter.END)
+        self.information.insert(0.0, info)
+        self.list = self.player1.inventory
 
-        self.end=tkinter.Button(self,text="END",command=self.exit_clicked)
         '''
         This method creates all of the widgets for the battle page.
         '''
@@ -68,6 +85,10 @@ class Screen_Battle (tkinter.Frame):
             elif self.player2.hp<=0:
                 tkinter.Label(self,text="DEAD",font=30).grid(row=1,column=2)
                 tkinter.Label(self,text="You win", font=30).grid(column=1)
+                p = self.player1.search1()
+                self.item()
+                self.l = tkinter.Label(self, text= p)
+                self.l.grid(columnspan=5)
                 self.end.grid(column=3)
                 self.player1.event-=5
                 self.next.destroy()
@@ -79,6 +100,7 @@ class Screen_Battle (tkinter.Frame):
 
         tkinter.Label(self, text="health: " + str(self.player1.hp) + "/" + str(self.player1_max_hp)).grid(row=2,column=0)
         tkinter.Label(self, text="health: " + str(self.player2.hp) + "/" + str(self.player2_max_hp)).grid(row=2,column=2)
+        self.item()
         ''' This method is called when the user presses the "Attack" button.
             
             This method does the following:
