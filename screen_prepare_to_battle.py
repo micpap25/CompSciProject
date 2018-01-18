@@ -17,7 +17,7 @@ class Screen_prepare_to_battle (tkinter.Frame):
     
     def create_widgets (self):
         tkinter.Label(self,text="you").grid()
-        #imageSmall = tkinter.PhotoImage(file="Images/" + self.player1.pic)
+        #imageSmall = tkinter.PhotoImage(file="images/" + self.player1.pic)
         #self.image_ref = imageSmall
         #w = tkinter.Label(self,
         #                 image=imageSmall,
@@ -26,7 +26,7 @@ class Screen_prepare_to_battle (tkinter.Frame):
         #w.grid(row=1, column=0)
         tkinter.Label(self, text="VS",font=30).grid(row=1, column=1)
         tkinter.Label(self, text="enemy").grid(row=0,column=2)
-        #imageSmall = tkinter.PhotoImage(file="Images/" + self.player2.pic)
+        #imageSmall = tkinter.PhotoImage(file="images/" + self.player2.pic)
         #self.image_ref = imageSmall
         #w = tkinter.Label(self,
          #                 image=imageSmall,

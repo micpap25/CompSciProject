@@ -1,4 +1,5 @@
 from tkinter import *
+from project_object_yeeet import Characters, Player
 #hio
 class Screen_Battle(Frame):
     def __init__(self, master, player1, player2, call_on_next):
@@ -59,7 +60,7 @@ class Screen_Battle(Frame):
         #
 
     def attack_clicked(self):
-        self.attack1 = self.player1.attack(self.player2)
+        self.attack1 = self.player1.s_attack(self.player2)
         self.attack2 = self.player2.attack(self.player1)
         '''This is the problem I don't know how to display the damage'''
         self.update["text"] = self.attack1 + '\n' + self.attack2
