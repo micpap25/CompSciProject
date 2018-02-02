@@ -110,7 +110,7 @@ class Screen_Battle(tkinter.Frame):
             4) If there is a victor, removes that Attack button and replaces it with an Exit button.     
         '''
         #
-        # TO DO
+        # TO DO1
         #
 
     def exit_clicked(self):
