@@ -1,5 +1,5 @@
 import tkinter
-
+import winsound
 class Screen_prepare_to_battle (tkinter.Frame):
     def __init__ (self, master, player1, player2, call_on_next):
         super(Screen_prepare_to_battle, self).__init__(master)
@@ -10,30 +10,24 @@ class Screen_prepare_to_battle (tkinter.Frame):
         
         # Save the method reference to which we return control after the player hits "Next"
         self.call_on_selected = call_on_next
-        
-        self.create_widgets()
+        winsound.PlaySound('sound\The-Decisive-Battle-Final-Fantasy-VI-Music-Extended.wav', winsound.SND_ASYNC)
         self.grid()
-#hi
+        self.create_widgets()
+#hi11
     
     def create_widgets (self):
         tkinter.Label(self,text="you").grid()
-        #imageSmall = tkinter.PhotoImage(file="Images/" + self.player1.pic)
-        #self.image_ref = imageSmall
-        #w = tkinter.Label(self,
-        #                 image=imageSmall,
-        #                  )
-        #w.photo = imageSmall
-        #w.grid(row=1, column=0)
+        print(self.player1.pic)
+        imageSmall = tkinter.PhotoImage(file="Images2\\" + str(self.player1.pic),master=self)
+        w = tkinter.Label(self, image=imageSmall)
+        w.photo = imageSmall
+        w.grid(row=1, column=0)
         tkinter.Label(self, text="VS",font=30).grid(row=1, column=1)
         tkinter.Label(self, text="enemy").grid(row=0,column=2)
-        #imageSmall = tkinter.PhotoImage(file="Images/" + self.player2.pic)
-        #self.image_ref = imageSmall
-        #w = tkinter.Label(self,
-         #                 image=imageSmall,
-         #                 )
-        #w.photo = imageSmall
-
-        #w.grid(row=1, column=2)
+        imageSmall = tkinter.PhotoImage(file="Images2/" + self.player2.pic,master=self)
+        w = tkinter.Label(self, image=imageSmall)
+        w.photo = imageSmall
+        w.grid(row=1, column=2)
         row1 =2
         column1=0
         for i in [self.player1,self.player2]:
@@ -56,7 +50,6 @@ class Screen_prepare_to_battle (tkinter.Frame):
  
     def continue_clicked(self):
         ''' This method is called when the Battle button is clicked. 
-            It passes control back to the callback method. '''         
+            It passes control back to the callback method. '''
         self.call_on_selected()
             
-        
