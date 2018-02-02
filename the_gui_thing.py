@@ -1,10 +1,8 @@
 import random
-from battle import Screen_Battle
-from project_object_yeeet import Characters,Room,Player,EnemyList
+from project_object_yeeet import Characters,Room,Player
 from character_make import CharList
 import tkinter
 import winsound
-import time
 
 class Room_GUI(tkinter.Frame):
     def __init__(self,master):
@@ -14,12 +12,26 @@ class Room_GUI(tkinter.Frame):
         #self.loot_crate=Loot_crate
         c = CharList("All_DA_Characters.txt")
         self.chars = c.load_chars()
-        self.x = 0
         self.select_character()
         self.grid()
         # self.alerts()
     def select_character(self):
         c = CharList("All_DA_Characters.txt")
+        self.x=0
+        self.y = 0
+        x = [0,1,2,3,4,4]
+        d = random.randint(0,(len(x)-1))
+        self.bx=x[d]
+        x = [1,2, 3, 4, 4]
+        d = random.randint(0, (len(x)-1))
+        self.by=x[d]
+        while self.bx==2 and self.by ==2:
+            x = [0, 1, 2, 3, 4, 4]
+            d = random.randint(0, (len(x) - 1))
+            self.bx = x[d]
+            x = [1, 2, 3, 4, 4]
+            d = random.randint(0, (len(x) - 1))
+            self.by = x[d]
         self.chars = c.load_chars()
         self.character = tkinter.StringVar()
         winsound.PlaySound(None, winsound.SND_ASYNC)
@@ -53,7 +65,7 @@ class Room_GUI(tkinter.Frame):
         createchar = tkinter.Button(self,text="custom character",command=self.makechar)
         createchar.grid()
         nxt_bttn = tkinter.Button(self, text="Next", command=self.move_on)
-        nxt_bttn.grid(row=10, column= 4, sticky=tkinter.E)
+        nxt_bttn.grid(row=0, column= 5, sticky=tkinter.E)
 
     def move_on(self):
         self.cho = int(self.character.get())
@@ -63,10 +75,10 @@ class Room_GUI(tkinter.Frame):
         for widget in self.winfo_children():
             widget.destroy()
         self.Room_widgets()
-        self.moveButton()
         self.grid()
         self.searchButton()
         self.items()
+        self.moveButton(self.x, self.y)
     def Room_widgets(self):
         self.imageSmall = tkinter.PhotoImage(file="Images\dungeon.png")
         self.w = tkinter.Label(self,
@@ -108,44 +120,48 @@ class Room_GUI(tkinter.Frame):
             self.select_character()
     def p1(self):
         self.p.destroy()
-    def moveButton(self):
-        p = random.randrange(0, 3)
+    def moveButton(self,x,y):
+        self.directionns = 0
+        self.directionwe = 0
+        self.north = tkinter.Button(self, text="North", command=self.MNorth)
 
-        self.direction = tkinter.StringVar()
-        self.direction.set(tkinter.NONE)
-        self.north = tkinter.Radiobutton(self, text="North", variable=self.direction, value="N")
-
-        if p <= 0:
+        if self.y != 4:
             self.north.grid(row=0, column=2, sticky=tkinter.W)
-        self.west = tkinter.Radiobutton(self, text="West", variable=self.direction, value="W")
+        self.west = tkinter.Button(self, text="West", command=self.MWest)
 
-        if p <= 1:
+        if self.x != 0:
             self.west.grid(row=1, column=0, sticky=tkinter.W)
-        self.south = tkinter.Radiobutton(self, text="South", variable=self.direction, value="S")
+        self.south = tkinter.Button(self, text="South", command=self.MSouth)
 
-        if p <= 2:
+        if self.y != 0:
             self.south.grid(row=2, column=2, sticky=tkinter.W)
-        self.east = tkinter.Radiobutton(self, text="East", variable=self.direction, value="E")
+        self.east = tkinter.Button(self, text="East", command=self.MEast)
 
-        if p <= 3:
+        if self.x != 4:
             self.east.grid(row=1, column=3, sticky=tkinter.W)
 
-        self.move_bttn = tkinter.Button(self, text="Move", command=self.moving)
-        self.move_bttn.grid(row=2, column=3, sticky=tkinter.W)
-        t = random.randrange(0,7)
-        if t in [1, 2] and self.x > 0:
+        if self.x ==2 and self.y ==2:
             self.merchant()
-        self.x += 1
+    def MNorth(self):
+        self.y +=1
+        self.moving()
+    def MSouth(self):
+        self.y-=1
+        self.moving()
+    def MEast(self):
+        self.x+=1
+        self.moving()
+    def MWest(self):
+        self.x-=1
+        self.moving()
     def moving(self):
         self.player.event += 5
+        for widgets in self.winfo_children():
+            widgets.destroy()
         self.imageSmall = tkinter.PhotoImage(file="images\dungeon.png")
         self.w = tkinter.Label(self,image = self.imageSmall,)
         self.w.photo = self.imageSmall
         self.w.grid(row=1, column=1, columnspan=2, sticky=tkinter.W)
-        self.east.destroy()
-        self.south.destroy()
-        self.west.destroy()
-        self.north.destroy()
         self.items()
         if self.search_bttn.winfo_exists()==0:
             self.searchButton()
@@ -158,9 +174,11 @@ class Room_GUI(tkinter.Frame):
             self.replay = tkinter.Button(self, text="replay?", command=self.select_character)
             self.replay.grid()
         if self.da_boss.hp>0 and self.player.hp>0:
-            MyDialog(root, self.player,self.da_boss)
+            MyDialog(self.player,self.da_boss,self.x,self.y,self.bx,self.by)
         if self.da_boss.hp > 0:
-            self.moveButton()
+            self.x += self.directionwe
+            self.y += self.directionns
+            self.moveButton(self.x,self.y)
         if self.player.hp<=0:
 
             for widget in self.winfo_children():
@@ -189,7 +207,7 @@ class Room_GUI(tkinter.Frame):
             self.replay = tkinter.Button(self, text="replay?", command=self.select_character)
             self.replay.grid()
         if self.da_boss.hp > 0 and self.player.hp > 0:
-            MyDialog(root,self.player, self.da_boss)
+            MyDialog(self.player, self.da_boss,self.x,self.y,self.bx,self.by)
         if self.player.hp<=0:
             for widget in self.winfo_children():
                 widget.destroy()
@@ -227,14 +245,16 @@ class Room_GUI(tkinter.Frame):
         for i in range(0, 4):
             random_index = random.randrange(0, len(r))
             self.inventory.append(r[random_index])
-        self.player.money=10
         self.widgets1()
     def widgets1(self):
         for widgets in self.winfo_children():
             widgets.destroy()
+        t = tkinter.Button(self,text="ATTACK!",command=self.attck)
+        t.grid()
         self.menuVar1 = tkinter.StringVar()
         self.list = self.inventory
-        tkinter.Label(self,text="you have"+str(self.player.money)+"gold coins").grid()
+        self.h = tkinter.Label(self,text="you have "+str(self.player.money)+" gold coins")
+        self.h.grid()
         if len(self.list) > 0:
             self.menuVar1.set(self.list[0])
             self.show = tkinter.OptionMenu(self, self.menuVar1, *self.list)
@@ -243,18 +263,32 @@ class Room_GUI(tkinter.Frame):
             self.useItem1.grid(row=4, column=1, sticky=tkinter.W)
             self.information1 = tkinter.Text(self, wrap=tkinter.WORD, width=15, height=5)
             self.information1.grid(row=5, column=0, sticky=tkinter.W)
-        self.exit = tkinter.Button(self,text="Exit",command=self.clear)
-        self.exit.grid()
-    def clear(self):
-        for widgets in self.winfo_children():
-            widgets.destroy()
-        self.moving()
+        self.north = tkinter.Button(self, text="North", command=self.MNorth)
+
+        if self.y != 4:
+            self.north.grid(row=0, column=2, sticky=tkinter.W)
+        self.west = tkinter.Button(self, text="West", command=self.MWest)
+
+        if self.x != 0:
+            self.west.grid(row=1, column=1, sticky=tkinter.E)
+        self.south = tkinter.Button(self, text="South", command=self.MSouth)
+
+        if self.y != 0:
+            self.south.grid(row=2, column=2, sticky=tkinter.W)
+        self.east = tkinter.Button(self, text="East", command=self.MEast)
+
+        if self.x != 4:
+            self.east.grid(row=1, column=3, sticky=tkinter.W)
+    def attck(self):
+        h = Characters(["shop keeper",1000,30,50,"images.gif"])
+        MyDialog(self.player,h,self.x,self.y,self.bx,self.by)
     def buy(self):
         self.choice = self.menuVar1.get()
         if self.choice == "Strange potion: 5 Gold" and self.player.money >= 5:
             self.player.inventory.append("Strange Potion")
             self.player.money -= 5
             w = "you now have a strange potion"
+            self.inventory.remove("Strange potion: 5 Gold")
             self.information1.insert(0.0,w)
         if self.choice == "Potion: 10 Gold" and self.player.money >= 10:
             self.player.inventory.append("Potion")
@@ -271,16 +305,27 @@ class Room_GUI(tkinter.Frame):
             self.player.money -= 15
             w = "you now have a strength potion"
             self.information1.insert(0.0, w)
+        self.h.destroy()
+        self.h = tkinter.Label(self, text="you have " + str(self.player.money) + " gold coins")
+        self.h.grid()
+        self.information1.delete(0.0, tkinter.END)
 
 class MyDialog:
 
-    def __init__(self, parent,player,da_boss):
+    def __init__(self,player,da_boss,x,y,x1,y1):
         self.player=player
-        Room(self.player,da_boss)
-
+        self.da_boss=da_boss
+        if da_boss.hp==1000:
+            self.player.event+=60
+            x = x1
+            y = y1
+            Room(self.player,self.da_boss,x,y,x1,y1)
+            self.player.event-=60
+        else:
+            Room(self.player,self.da_boss,x,y,x1,y1)
 root=tkinter.Tk()
 root.title("HI")
 app=Room_GUI(root)
 root.mainloop()
 
-#HI1
+#HI11
